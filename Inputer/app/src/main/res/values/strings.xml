@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Inputer</string>
+    <string name="action_settings">Settings</string>
+    <string name="accessibility_service_description">accessibility_service_description</string>
+    <string name="template_screen_on">Screen on. Volume %1$s percent.</string>
+    <string name="template_screen_off">Screen off. Volume %1$s percent.</string>
+    <string name="task_name">Task</string>
+    <string name="task_complete_template">Task %1$s %2$s</string>
+    <string name="task_complete">is complete</string>
+    <string name="task_not_complete">is not complete</string>
+    <string name="accessibility_custom_view">Accessibility/Custom View</string>
+    <string name="accessibility_custom_view_instructions">
+        1. Enable TalkBack (Settings -> Accessibility -> TalkBack).
+        \n\n2. Enable Explore-by-Touch (Settings -> Accessibility -> Explore by Touch).
+        \n\n3. Touch explore/poke the buttons.
+    </string>
+    <string name="accessibility_custom_on">On</string>
+    <string name="accessibility_custom_off">Off</string>
+
+        <string name="accessibility_query_window_instructions">
+        1. Enable QueryBack (Settings -> Accessibility -> QueryBack).
+        \n\n2. Enable Explore-by-Touch (Settings -> Accessibility -> Explore by Touch).
+        \n\n3. Touch explore the list.
+    </string>
+
+    <string name="accessibility_query_window">Accessibility/Accessibility Node Querying</string>
+    <string name="accessibility_query_window_label">QueryBack</string>
+    <string name="accessibility_query_window_description">Task App Accessibility Service</string>
+</resources>
