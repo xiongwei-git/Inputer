@@ -1,15 +1,12 @@
 package com.android.ted.inputer.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.android.ted.inputer.R;
-import com.android.ted.inputer.service.FloatWindowService;
-import com.android.ted.inputer.window.TWindowManager;
 
 public class FloatWindowBigView extends LinearLayout {
 
@@ -31,23 +28,6 @@ public class FloatWindowBigView extends LinearLayout {
 		viewHeight = view.getLayoutParams().height;
 		Button close = (Button) findViewById(R.id.close);
 		Button back = (Button) findViewById(R.id.back);
-		close.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// 点击关闭悬浮窗的时候，移除所有悬浮窗，并停止Service
-				TWindowManager.removeBigWindow(context);
-				TWindowManager.removeFloatBtn(context);
-				Intent intent = new Intent(getContext(), FloatWindowService.class);
-				context.stopService(intent);
-			}
-		});
-		back.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// 点击返回的时候，移除大悬浮窗，创建小悬浮窗
-				TWindowManager.removeBigWindow(context);
-				TWindowManager.createFloatBtnWindow(context);
-			}
-		});
+
 	}
 }

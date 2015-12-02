@@ -54,7 +54,6 @@ public class FloatWindowService extends Service {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-						TWindowManager.createFloatBtnWindow(getApplicationContext());
 					}
 				});
 			}
@@ -73,7 +72,6 @@ public class FloatWindowService extends Service {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-						TWindowManager.updateUsedPercent(getApplicationContext());
 					}
 				});
 			}

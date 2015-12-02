@@ -24,7 +24,7 @@
     </string>
 
     <string name="accessibility_query_window">Accessibility/Accessibility Node Querying</string>
-    <string name="accessibility_query_window_label">QueryBack</string>
+    <string name="accessibility_query_window_label">Inputer</string>
     <string name="accessibility_query_window_description">Task App Accessibility Service</string>
 
     <string name="accesses_data_permission_description">This app has permission to access phrases that you define in the Texpand app</string>

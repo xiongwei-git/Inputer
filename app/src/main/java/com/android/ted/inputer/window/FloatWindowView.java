@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.android.ted.inputer.R;
 import com.android.ted.inputer.db.SharePreData;
@@ -32,14 +31,12 @@ public class FloatWindowView extends FrameLayout {
 
     private FloatBtnType mFloatBtnType = FloatBtnType.SUGGEST;
 
+    private OnClickListener mOnClickListener;
 
-    /**
-     * 打开大悬浮窗，同时关闭小悬浮窗。
-     */
+
     private void onClickFloatBtn() {
-        if(getFloatBtnType().equals(FloatBtnType.SUGGEST)){
-            Toast.makeText(mContext, "点击了按钮", Toast.LENGTH_SHORT).show();
-        }
+        if(null != mOnClickListener)
+            mOnClickListener.onClickBtn(getFloatBtnType());
     }
 
 
@@ -67,9 +64,10 @@ public class FloatWindowView extends FrameLayout {
         mParams = params;
     }
 
-    public void initFloatBtnView(FloatBtnType type){
+    public void initFloatBtnView(FloatBtnType type,OnClickListener onClickListener){
         setFloatBtnType(type);
         addView(makeFloatBtnView());
+        setOnClickListener(onClickListener);
     }
 
     public FloatBtnType getFloatBtnType() {
@@ -78,6 +76,14 @@ public class FloatWindowView extends FrameLayout {
 
     public void setFloatBtnType(FloatBtnType floatBtnType) {
         mFloatBtnType = floatBtnType;
+    }
+
+    public OnClickListener getOnClickListener() {
+        return mOnClickListener;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        mOnClickListener = onClickListener;
     }
 
     @Override
@@ -148,5 +154,9 @@ public class FloatWindowView extends FrameLayout {
 
     public enum FloatBtnType {
         SUGGEST,SELECT,BACK
+    }
+
+    public interface OnClickListener{
+        void onClickBtn(FloatBtnType type);
     }
 }

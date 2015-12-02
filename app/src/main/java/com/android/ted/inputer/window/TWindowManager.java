@@ -9,7 +9,6 @@ import android.view.WindowManager.LayoutParams;
 import com.android.ted.inputer.R;
 import com.android.ted.inputer.db.SharePreData;
 import com.android.ted.inputer.util.UiUtil;
-import com.android.ted.inputer.view.FloatWindowBigView;
 import com.cocosw.favor.FavorAdapter;
 
 /**
@@ -18,9 +17,7 @@ import com.cocosw.favor.FavorAdapter;
  */
 public class TWindowManager {
     private static FloatWindowView mFloatBtnView;
-    private static FloatWindowBigView bigWindow;
     private static LayoutParams mFloatBtnViewParams;
-    private static LayoutParams bigWindowParams;
     private static WindowManager mWindowManager;
 
     /**
@@ -28,10 +25,10 @@ public class TWindowManager {
      *
      * @param context 必须为应用程序的Context.
      */
-    public static void createFloatBtnWindow(Context context) {
+    public static void createFloatBtnWindow(Context context, FloatWindowView.OnClickListener onClickListener) {
         if (mFloatBtnView == null) {
             mFloatBtnView = new FloatWindowView(context);
-            mFloatBtnView.initFloatBtnView(FloatWindowView.FloatBtnType.SUGGEST);
+            mFloatBtnView.initFloatBtnView(FloatWindowView.FloatBtnType.SUGGEST,onClickListener);
             if (mFloatBtnViewParams == null)
                 mFloatBtnViewParams = makeFloatBtnParams(context);
             mFloatBtnView.setParams(mFloatBtnViewParams);
@@ -73,62 +70,12 @@ public class TWindowManager {
     }
 
     /**
-     * 创建一个大悬浮窗。位置为屏幕正中间。
-     *
-     * @param context 必须为应用程序的Context.
-     */
-    public static void createBigWindow(Context context) {
-        WindowManager windowManager = getWindowManager(context);
-        int screenWidth = windowManager.getDefaultDisplay().getWidth();
-        int screenHeight = windowManager.getDefaultDisplay().getHeight();
-        if (bigWindow == null) {
-            bigWindow = new FloatWindowBigView(context);
-            if (bigWindowParams == null) {
-                bigWindowParams = new LayoutParams();
-                bigWindowParams.x = screenWidth / 2 - FloatWindowBigView.viewWidth / 2;
-                bigWindowParams.y = screenHeight / 2 - FloatWindowBigView.viewHeight / 2;
-                bigWindowParams.type = LayoutParams.TYPE_PHONE;
-                bigWindowParams.format = PixelFormat.RGBA_8888;
-                bigWindowParams.gravity = Gravity.LEFT | Gravity.TOP;
-                bigWindowParams.width = FloatWindowBigView.viewWidth;
-                bigWindowParams.height = FloatWindowBigView.viewHeight;
-            }
-            windowManager.addView(bigWindow, bigWindowParams);
-        }
-    }
-
-    /**
-     * 将大悬浮窗从屏幕上移除。
-     *
-     * @param context 必须为应用程序的Context.
-     */
-    public static void removeBigWindow(Context context) {
-        if (bigWindow != null) {
-            WindowManager windowManager = getWindowManager(context);
-            windowManager.removeView(bigWindow);
-            bigWindow = null;
-        }
-    }
-
-    /**
-     * 更新小悬浮窗的TextView上的数据，显示内存使用的百分比。
-     *
-     * @param context 可传入应用程序上下文。
-     */
-    public static void updateUsedPercent(Context context) {
-        if (mFloatBtnView != null) {
-//			TextView percentView = (TextView) mFloatBtnView.findViewById(R.id.percent);
-//			percentView.setText("xiongwei");
-        }
-    }
-
-    /**
-     * 是否有悬浮窗(包括小悬浮窗和大悬浮窗)显示在屏幕上。
+     * 是否有悬浮窗显示在屏幕上。
      *
      * @return 有悬浮窗显示在桌面上返回true，没有的话返回false。
      */
     public static boolean isWindowShowing() {
-        return mFloatBtnView != null || bigWindow != null;
+        return mFloatBtnView != null;
     }
 
 
