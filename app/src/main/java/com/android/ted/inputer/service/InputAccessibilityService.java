@@ -18,6 +18,8 @@ package com.android.ted.inputer.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.android.ted.inputer.window.FloatWindowView;
@@ -28,8 +30,20 @@ import com.android.ted.inputer.window.TWindowManager;
  */
 public class InputAccessibilityService extends AccessibilityService
         implements InputDataInterface,FloatWindowView.OnClickListener {
+    private final int MSG_HIDE_BTN = 0x001;
+
     private Context mContext;
     private InputDataOperator mDataOperator;
+
+    private Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.what == MSG_HIDE_BTN){
+                TWindowManager.removeFloatBtn(mContext);
+            }
+            return false;
+        }
+    });
 
     @Override
     public void onClickBtn(FloatWindowView.FloatBtnType type) {
@@ -40,6 +54,8 @@ public class InputAccessibilityService extends AccessibilityService
     public void onMatchPart() {
         if (TWindowManager.isWindowShowing()) return;
         TWindowManager.createFloatBtnWindow(mContext,this);
+        mHandler.removeMessages(MSG_HIDE_BTN);
+        mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000l);
     }
 
     @Override
@@ -70,82 +86,7 @@ public class InputAccessibilityService extends AccessibilityService
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         mDataOperator.onHandleAccessibilityEvent(event);
-
-//        // Grab the parent of the view that fired the event.
-//        AccessibilityNodeInfo rowNode = getListItemNodeInfo(source);
-//        if (rowNode == null) {
-//            return;
-//        }
-//
-//        // Using this parent, get references to both child nodes, the label and the checkbox.
-//        AccessibilityNodeInfo labelNode = rowNode.getChild(0);
-//        if (labelNode == null) {
-//            rowNode.recycle();
-//            return;
-//        }
-//
-//        AccessibilityNodeInfo completeNode = rowNode.getChild(1);
-//        if (completeNode == null) {
-//            rowNode.recycle();
-//            return;
-//        }
-//
-//        // Determine what the task is and whether or not it's complete, based on
-//        // the text inside the label, and the state of the check-box.
-//        if (rowNode.getChildCount() < 2 || !rowNode.getChild(1).isCheckable()) {
-//            rowNode.recycle();
-//            return;
-//        }
-//
-//        CharSequence taskLabel = labelNode.getText();
-//        final boolean isComplete = completeNode.isChecked();
-//
-//        String completeStr = null;
-//        if (isComplete) {
-//            completeStr = getString(R.string.task_complete);
-//        } else {
-//            completeStr = getString(R.string.task_not_complete);
-//        }
-//
-//        String taskStr = getString(R.string.task_complete_template, taskLabel, completeStr);
-//        StringBuilder utterance = new StringBuilder(taskStr);
-//
-//        // The custom ListView added extra context to the event by adding an
-//        // AccessibilityRecord to it. Extract that from the event and read it.
-//        final int records = event.getRecordCount();
-//        for (int i = 0; i < records; i++) {
-//            AccessibilityRecord record = event.getRecord(i);
-//            CharSequence contentDescription = record.getContentDescription();
-//            if (!TextUtils.isEmpty(contentDescription)) {
-//                utterance.append(SEPARATOR);
-//                utterance.append(contentDescription);
-//            }
-//        }
-//
-//        // Announce the utterance.
-//        //mTts.speak(utterance.toString(), TextToSpeech.QUEUE_FLUSH, null);
-//        Log.d(LOG_TAG, utterance.toString());
     }
-
-
-
-//    private AccessibilityNodeInfo getListItemNodeInfo(AccessibilityNodeInfo source) {
-//        AccessibilityNodeInfo current = source;
-//        while (true) {
-//            AccessibilityNodeInfo parent = current.getParent();
-//            if (parent == null) {
-//                return null;
-//            }
-//            if (TASK_LIST_VIEW_CLASS_NAME.equals(parent.getClassName())) {
-//                return current;
-//            }
-//            // NOTE: Recycle the infos.
-//            AccessibilityNodeInfo oldCurrent = current;
-//            current = parent;
-//            oldCurrent.recycle();
-//        }
-//    }
-
 
 
 }

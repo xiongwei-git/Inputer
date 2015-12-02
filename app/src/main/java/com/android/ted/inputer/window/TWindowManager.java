@@ -33,6 +33,7 @@ public class TWindowManager {
                 mFloatBtnViewParams = makeFloatBtnParams(context);
             mFloatBtnView.setParams(mFloatBtnViewParams);
             getWindowManager(context).addView(mFloatBtnView, mFloatBtnViewParams);
+            mFloatBtnView.animate().scaleX(1.0F).scaleY(1.0F).setDuration(250L).start();
         }
     }
 
@@ -57,7 +58,7 @@ public class TWindowManager {
         layoutParams.alpha = 0.8f;
         layoutParams.x = lastX;
         layoutParams.y = lastY;
-        layoutParams.windowAnimations=android.R.style.Animation_InputMethod;
+        //layoutParams.windowAnimations=android.R.style.Animation_Activity;
         return layoutParams;
     }
 
