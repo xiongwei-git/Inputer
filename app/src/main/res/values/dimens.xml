@@ -3,4 +3,38 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="sb__bg_corner_radius">0.0dip</dimen>
+    <dimen name="sb__offset">0.0dip</dimen>
+    <dimen name="snack_bar_animation_position">0.0dip</dimen>
+    <dimen name="card_width">250.0dip</dimen>
+    <dimen name="fab_actions_spacing">16.0dip</dimen>
+    <dimen name="fab_icon_size">24.0dip</dimen>
+    <dimen name="fab_labels_margin">8.0dip</dimen>
+    <dimen name="fab_plus_icon_size">14.0dip</dimen>
+    <dimen name="fab_plus_icon_stroke">2.0dip</dimen>
+    <dimen name="fab_shadow_offset">3.0dip</dimen>
+    <dimen name="fab_shadow_radius">9.0dip</dimen>
+    <dimen name="fab_size_mini">40.0dip</dimen>
+    <dimen name="fab_size_normal">56.0dip</dimen>
+    <dimen name="fab_size_normal_real">62.0dip</dimen>
+    <dimen name="fab_stroke_width">1.0dip</dimen>
+    <item type="dimen" name="floatinghintedittext_animation_steps">6</item>
+    <item type="dimen" name="floatinghintedittext_hint_scale">0.6</item>
+    <dimen name="item_touch_helper_max_drag_scroll_per_frame">20.0dip</dimen>
+    <dimen name="line_divider_inset">1.0dip</dimen>
+    <dimen name="sb__text_padding_bottom">14.0dip</dimen>
+    <dimen name="sb__text_padding_left">24.0dip</dimen>
+    <dimen name="sb__text_padding_right">24.0dip</dimen>
+    <dimen name="sb__text_padding_top">14.0dip</dimen>
+    <dimen name="sb__text_size">14.0sp</dimen>
+    <dimen name="snack_bar_action_text_size">16.0sp</dimen>
+    <dimen name="snack_bar_bottom_padding">16.0dip</dimen>
+    <dimen name="snack_bar_height">48.0dip</dimen>
+    <dimen name="snack_bar_left_right_padding">24.0dip</dimen>
+    <dimen name="snack_bar_max_height">80.0dip</dimen>
+    <dimen name="snack_bar_text_size">16.0sp</dimen>
+    <dimen name="snack_bar_top_padding">12.0dip</dimen>
+    <dimen name="space_divider_inset">2.0dip</dimen>
+    <dimen name="suggestion_list_item_height">72.0dip</dimen>
 </resources>

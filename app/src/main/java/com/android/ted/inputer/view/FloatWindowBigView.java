@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.android.ted.inputer.R;
+import com.android.ted.inputer.service.FloatWindowService;
+import com.android.ted.inputer.window.TWindowManager;
 
 public class FloatWindowBigView extends LinearLayout {
 
@@ -33,8 +35,8 @@ public class FloatWindowBigView extends LinearLayout {
 			@Override
 			public void onClick(View v) {
 				// 点击关闭悬浮窗的时候，移除所有悬浮窗，并停止Service
-				MyWindowManager.removeBigWindow(context);
-				MyWindowManager.removeSmallWindow(context);
+				TWindowManager.removeBigWindow(context);
+				TWindowManager.removeFloatBtn(context);
 				Intent intent = new Intent(getContext(), FloatWindowService.class);
 				context.stopService(intent);
 			}
@@ -43,8 +45,8 @@ public class FloatWindowBigView extends LinearLayout {
 			@Override
 			public void onClick(View v) {
 				// 点击返回的时候，移除大悬浮窗，创建小悬浮窗
-				MyWindowManager.removeBigWindow(context);
-				MyWindowManager.createSmallWindow(context);
+				TWindowManager.removeBigWindow(context);
+				TWindowManager.createFloatBtnWindow(context);
 			}
 		});
 	}

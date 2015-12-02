@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/savePhraseMenuItem"
+        android:icon="@drawable/ic_done_white_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="@string/save_phrase"/>
+    <item
+        android:id="@+id/deletePhraseMenuItem"
+        android:icon="@drawable/ic_delete_white_24dp"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:title="@string/delete_phrase"
+        android:visible="false"/>
+</menu>

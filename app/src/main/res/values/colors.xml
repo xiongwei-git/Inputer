@@ -3,4 +3,36 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="accentColor">#ffffffff</color>
+    <color name="app_bg">#ffe4e3e4</color>
+    <color name="background">#ffe5e5e5</color>
+    <color name="black_semi_transparent">#b2000000</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+    <color name="clipboard_anchor_color">#fffd8a2a</color>
+    <color name="dark_gray">#ff666666</color>
+    <color name="day_anchor_color">#fffb454a</color>
+    <color name="divider_line_color">#ffd6d6d6</color>
+    <color name="half_black">#ff808080</color>
+    <color name="hour_anchor_color">#ff9e9093</color>
+    <color name="light_green">#aa1aa260</color>
+    <color name="minute_anchor_color">#ff6fb2b7</color>
+    <color name="month_anchor_color">#ff3cb5e2</color>
+    <color name="pink">#ffe91e63</color>
+    <color name="pink_pressed">#ffec407a</color>
+    <color name="primary">#ff1aa260</color>
+    <color name="primaryDark">#ff2f9260</color>
+    <color name="primaryDarkText">#ff2e2e2e</color>
+    <color name="sb__action_bg_color">#1affffff</color>
+    <color name="sb__action_text_color">#ffffffff</color>
+    <color name="sb__background">#ff323232</color>
+    <color name="sb__text_color">#ffffffff</color>
+    <color name="second_anchor_color">#ff0c92a1</color>
+    <color name="secondaryLightText">#ff787878</color>
+    <color name="snack_bar_bg">#ff323232</color>
+    <color name="switchBarColor">#ff616161</color>
+    <color name="white">#fffafafa</color>
+    <color name="white_pressed">#fff1f1f1</color>
+    <color name="year_anchor_color">#ff18a764</color>
 </resources>

@@ -26,7 +26,6 @@ public class TAccessibilityService extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent event) {
         int eventType = event.getEventType();
         String eventText = "";
-        //Log.i(TAG, "==============Start====================");
         switch (eventType) {
             case AccessibilityEvent.TYPE_VIEW_CLICKED:
                 eventText = "TYPE_VIEW_CLICKED";
