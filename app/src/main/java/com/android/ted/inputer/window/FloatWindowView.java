@@ -82,10 +82,6 @@ public class FloatWindowView extends FrameLayout {
         refreshFloatBtnView();
     }
 
-    public OnClickListener getOnClickListener() {
-        return mOnClickListener;
-    }
-
     public void setOnClickListener(OnClickListener onClickListener) {
         mOnClickListener = onClickListener;
     }

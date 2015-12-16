@@ -14,31 +14,20 @@
  *    limitations under the License.
  */
 
-package com.android.ted.inputer.model;
+package com.android.ted.inputer.main;
+
+import android.app.Application;
+
+import com.android.ted.inputer.util.TLog;
 
 /**
- * Created by Ted on 2015/12/10.
- * 被替换掉的文本对象
+ * Created by Ted on 2015/12/16.
+ * MainApplication
  */
-public class ReplacedTxt {
-    //被替换的文字内容
-    private String replacedTxt;
-    //变形之前光标位置
-    private int startPos;
-
-    public String getReplacedTxt() {
-        return replacedTxt;
-    }
-
-    public void setReplacedTxt(String replacedTxt) {
-        this.replacedTxt = replacedTxt;
-    }
-
-    public int getStartPos() {
-        return startPos;
-    }
-
-    public void setStartPos(int startPos) {
-        this.startPos = startPos;
+public class MainApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        TLog.init();
     }
 }

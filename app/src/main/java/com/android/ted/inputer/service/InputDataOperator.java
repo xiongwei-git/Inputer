@@ -48,6 +48,7 @@ public class InputDataOperator {
         int eventType = event.getEventType();
         switch (eventType) {
             case AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED:
+                mDataInterface.onTextChanged();
                 readTextChangeEvent(event);
                 break;
             default:
@@ -113,10 +114,9 @@ public class InputDataOperator {
      */
     private boolean isFilterApp(AccessibilityEvent event) {
         String packageName = event.getPackageName().toString();
-        if (TextUtils.isEmpty(packageName)) return true;
-        if (getPackageName().equals(packageName)) return true;
-        if (GlobalCache.getInstance().getAppPackageNameList().contains(packageName)) return true;
-        return false;
+        return TextUtils.isEmpty(packageName) ||
+                getPackageName().equals(packageName) ||
+                GlobalCache.getInstance().getAppPackageNameList().contains(packageName);
     }
 
     /***

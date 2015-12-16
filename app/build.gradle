@@ -11,10 +11,34 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
+
+    productFlavors {
+        develop {}
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+
         release {
+            storeFile file("ted_android.jks")
+            storePassword "xiongwei"
+            keyAlias "ted_android"
+            keyPassword "xiongwei"
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+        }
+
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -25,4 +49,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.cocosw:favor:0.2.0@aar'
     compile 'com.getbase:floatingactionbutton:1.10.1'
+    compile 'com.github.orhanobut:logger:1.12'
 }

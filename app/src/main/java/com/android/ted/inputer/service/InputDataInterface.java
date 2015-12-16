@@ -22,4 +22,5 @@ package com.android.ted.inputer.service;
 public interface InputDataInterface {
     void onMatchPart();
     void onMatchAll();
+    void onTextChanged();
 }

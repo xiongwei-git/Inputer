@@ -9,14 +9,18 @@ import com.cocosw.favor.Default;
  */
 @AllFavor
 public interface SharePreData {
+    @Default("false")
+    boolean getAppStatus();///主功能是否打开
     @Default("-1")
-    int getFloatViewX();
+    int getFloatViewX();//上次浮窗的位置x
+    @Default("-1")
+    int getFloatViewY();//上次浮窗的位置y
 
-    @Default("-1")
-    int getFloatViewY();
+
 
 
     /*************************/
+    void setAppStatus(boolean status);
     void setFloatViewX(int floatViewX);
     void setFloatViewY(int floatViewY);
 }

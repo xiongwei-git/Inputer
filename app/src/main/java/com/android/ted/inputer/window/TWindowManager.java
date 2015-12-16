@@ -43,7 +43,7 @@ public class TWindowManager {
 
     private static LayoutParams makeFloatBtnParams(Context context) {
         SharePreData sharePreData = new FavorAdapter.Builder(context).build().create(SharePreData.class);
-        int lastX = sharePreData.getFloatViewY();
+        int lastX = sharePreData.getFloatViewX();
         int lastY = sharePreData.getFloatViewY();
         if (lastX < 0 || lastY < 0) {
             int screenWidth = UiUtil.getScreenWidth(context);
@@ -68,6 +68,12 @@ public class TWindowManager {
     public static void hideFloatBtn() {
         if (mFloatBtnView != null) {
             mFloatBtnView.animate().scaleX(0.0F).scaleY(0.0F).setDuration(250L).start();
+        }
+    }
+
+    public static void hideRevertBtn() {
+        if (mFloatBtnView != null && mFloatBtnView.getFloatBtnType().equals(FloatWindowView.FloatBtnType.BACK)) {
+            hideFloatBtn();
         }
     }
 

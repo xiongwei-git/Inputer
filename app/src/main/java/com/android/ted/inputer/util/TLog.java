@@ -14,31 +14,31 @@
  *    limitations under the License.
  */
 
-package com.android.ted.inputer.model;
+package com.android.ted.inputer.util;
+
+import com.android.ted.inputer.BuildConfig;
+import com.orhanobut.logger.Logger;
 
 /**
- * Created by Ted on 2015/12/10.
- * 被替换掉的文本对象
+ * Created by Ted on 2015/12/16.
+ * TLog
  */
-public class ReplacedTxt {
-    //被替换的文字内容
-    private String replacedTxt;
-    //变形之前光标位置
-    private int startPos;
+public class TLog {
+    private static boolean isShowLog = false;
 
-    public String getReplacedTxt() {
-        return replacedTxt;
+    public static void init(){
+        isShowLog = BuildConfig.LOG_DEBUG;
+        Logger.init("xiongwei").methodCount(1);
     }
 
-    public void setReplacedTxt(String replacedTxt) {
-        this.replacedTxt = replacedTxt;
+    public static void d(String message){
+        if(!isShowLog)return;
+        Logger.d(message,"");
     }
 
-    public int getStartPos() {
-        return startPos;
+    public static void e(String message){
+        if(!isShowLog)return;
+        Logger.e(message,"");
     }
 
-    public void setStartPos(int startPos) {
-        this.startPos = startPos;
-    }
 }

@@ -1,4 +1,20 @@
-package com.android.ted.inputer;
+/*
+ *    Copyright 2016 Ted xiong-wei@hotmail.com
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+package com.android.ted.inputer.main;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,12 +26,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
+import com.android.ted.inputer.R;
+import com.android.ted.inputer.model.Constants;
+import com.android.ted.inputer.util.TLog;
 import com.android.ted.inputer.util.VersionUtil;
 import com.android.ted.inputer.window.TWindowManager;
 
-public class MainActivity extends AppCompatActivity {
-    public static int OVERLAY_PERMISSION_REQ_CODE = 0x0012;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private RelativeLayout mSwitchBar;
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.switch_bar:
+
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,27 +60,22 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own acti", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
+
+        mSwitchBar = (RelativeLayout)findViewById(R.id.switch_bar);
+        mSwitchBar.setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -59,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        TWindowManager.hideFloatBtn();
     }
 
     @Override
@@ -70,17 +96,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+        if (requestCode == Constants.OVERLAY_PERMISSION_REQ_CODE) {
             canDrawOverlays();
         }
     }
 
-    public void canDrawOverlays() {
+    /***
+     * 检测是否支持windows显示
+     */
+    private void canDrawOverlays() {
         if (VersionUtil.isM()) {
             if (!Settings.canDrawOverlays(this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));
-                startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+                startActivityForResult(intent, Constants.OVERLAY_PERMISSION_REQ_CODE);
             }
         }
     }

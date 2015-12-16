@@ -20,9 +20,21 @@ import com.android.ted.inputer.model.ArgotRecord;
 
 /**
  * Created by Ted on 2015/12/15.
- * TextUtil
+ * ArgotUtil
  */
 public class ArgotUtil {
+
+    /***
+     * 转换含有暗语的字符串为明文
+     * @param srcStr 含有暗语的文字
+     * @param selection 光标位置
+     * @param argotRecord 暗语对象
+     * @return 明文
+     */
+    public String getPlanTxt(String srcStr,int selection,ArgotRecord argotRecord){
+        String[] result = SplitText(srcStr,selection,argotRecord);
+        return result[0] + argotRecord.getPlanWord() + result[2];
+    }
 
     /***
      * 根据selection和ArgotRecord 把目标字符串拆开为三段文字，分别为 前段，被替换段，后段

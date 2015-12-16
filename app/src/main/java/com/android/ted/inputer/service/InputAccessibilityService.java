@@ -22,11 +22,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.android.ted.inputer.model.GlobalCache;
 import com.android.ted.inputer.window.FloatWindowView;
 import com.android.ted.inputer.window.TWindowManager;
 
 /**
  * Created by Ted on 2015/12/2.
+ * InputAccessibilityService
  */
 public class InputAccessibilityService extends AccessibilityService
         implements InputDataInterface,FloatWindowView.OnClickListener {
@@ -53,6 +55,11 @@ public class InputAccessibilityService extends AccessibilityService
     }
 
     @Override
+    public void onTextChanged() {
+        TWindowManager.hideRevertBtn();
+    }
+
+    @Override
     public void onMatchPart() {
         TWindowManager.showFloatBtnWindow(mContext,this, FloatWindowView.FloatBtnType.SUGGEST);
         mHandler.removeMessages(MSG_HIDE_BTN);
@@ -70,15 +77,19 @@ public class InputAccessibilityService extends AccessibilityService
     public void onServiceConnected() {
         mContext = this;
         mDataOperator = new InputDataOperator(this);
+        GlobalCache.getInstance().setAccessibilitySupport(true);
     }
 
     @Override
     public void onInterrupt() {
+        GlobalCache.getInstance().setAccessibilitySupport(false);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        GlobalCache.getInstance().setAccessibilitySupport(false);
+        mContext = null;
         mDataOperator = null;
     }
 
