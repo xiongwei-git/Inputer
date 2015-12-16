@@ -32,6 +32,7 @@ public class InputDataOperator {
 
     private AccessibilityNodeInfo mFocusNodeInfo;
     private String mFocusRecord = "xiongwei";
+    //private String
 
     public InputDataOperator(InputDataInterface dataInterface) {
         this.mDataInterface = dataInterface;
@@ -54,12 +55,17 @@ public class InputDataOperator {
         }
     }
 
-    public void onExpand(){
-        if(mFocusNodeInfo == null)return;
-        if(TextUtils.isEmpty(mFocusRecord))return;
+    public void onExpand() {
+        if (mFocusNodeInfo == null) return;
+        if (TextUtils.isEmpty(mFocusRecord)) return;
         Bundle arguments = new Bundle();
-        arguments.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE,mFocusRecord);
+        arguments.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, mFocusRecord);
         mFocusNodeInfo.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_TEXT.getId(), arguments);
+    }
+
+    public void onRepeal(){
+        if (mFocusNodeInfo == null) return;
+        if (TextUtils.isEmpty(mFocusRecord)) return;
     }
 
 
@@ -72,10 +78,14 @@ public class InputDataOperator {
         AccessibilityNodeInfo editView = getEditTextNodeInfo(source);
         if (null != editView && null != editView.getText()) {
             String text = editView.getText().toString();
-            if (text.equalsIgnoreCase("123")) {
+            if (text.equals("12")) {
                 mFocusNodeInfo = editView;
                 mFocusRecord = "xiongwei";
                 mDataInterface.onMatchPart();
+            } else if (text.equalsIgnoreCase("123")) {
+                mFocusNodeInfo = editView;
+                mFocusRecord = "xiongwei";
+                mDataInterface.onMatchAll();
             }
         }
     }

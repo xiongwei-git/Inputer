@@ -28,6 +28,7 @@ public class FloatWindowView extends FrameLayout {
     private float xInView;
     private float yInView;
     private int statusBarHeight = 0;
+    private FloatingActionButton mFloatingActionButton;
 
     private FloatBtnType mFloatBtnType = FloatBtnType.SUGGEST;
 
@@ -65,9 +66,11 @@ public class FloatWindowView extends FrameLayout {
     }
 
     public void initFloatBtnView(FloatBtnType type,OnClickListener onClickListener){
-        setFloatBtnType(type);
-        addView(makeFloatBtnView());
         setOnClickListener(onClickListener);
+        if(null == mFloatingActionButton)
+            mFloatingActionButton = new FloatingActionButton(mContext);
+        addView(mFloatingActionButton);
+        setFloatBtnType(type);
     }
 
     public FloatBtnType getFloatBtnType() {
@@ -76,6 +79,7 @@ public class FloatWindowView extends FrameLayout {
 
     public void setFloatBtnType(FloatBtnType floatBtnType) {
         mFloatBtnType = floatBtnType;
+        refreshFloatBtnView();
     }
 
     public OnClickListener getOnClickListener() {
@@ -136,20 +140,20 @@ public class FloatWindowView extends FrameLayout {
      * 构造视图
      * @return 视图对象
      */
-    private FloatingActionButton makeFloatBtnView(){
-        FloatingActionButton floatingActionButton = new FloatingActionButton(mContext);
-        floatingActionButton.setClickable(false);
-        if(getFloatBtnType().equals(FloatBtnType.SELECT)){
-            floatingActionButton.setColorNormalResId(R.color.primary);
-            floatingActionButton.setIcon(R.drawable.ic_done_white_24dp);
-        }else if(getFloatBtnType().equals(FloatBtnType.SUGGEST)){
-            floatingActionButton.setColorNormalResId(R.color.clipboard_anchor_color);
-            floatingActionButton.setIcon(R.drawable.ic_menu_white_24dp);
-        }else if(getFloatBtnType().equals(FloatBtnType.BACK)){
-            floatingActionButton.setColorNormalResId(R.color.clipboard_anchor_color);
-            floatingActionButton.setIcon(R.drawable.ic_undo_white_24dp);
+    private void refreshFloatBtnView() {
+        if (null == mFloatingActionButton)
+            mFloatingActionButton = new FloatingActionButton(mContext);
+        mFloatingActionButton.setClickable(false);
+        if (getFloatBtnType().equals(FloatBtnType.SELECT)) {
+            mFloatingActionButton.setColorNormalResId(R.color.primary);
+            mFloatingActionButton.setIcon(R.drawable.ic_done_white_24dp);
+        } else if (getFloatBtnType().equals(FloatBtnType.SUGGEST)) {
+            mFloatingActionButton.setColorNormalResId(R.color.clipboard_anchor_color);
+            mFloatingActionButton.setIcon(R.drawable.ic_menu_white_24dp);
+        } else if (getFloatBtnType().equals(FloatBtnType.BACK)) {
+            mFloatingActionButton.setColorNormalResId(R.color.clipboard_anchor_color);
+            mFloatingActionButton.setIcon(R.drawable.ic_undo_white_24dp);
         }
-        return floatingActionButton;
     }
 
     public enum FloatBtnType {

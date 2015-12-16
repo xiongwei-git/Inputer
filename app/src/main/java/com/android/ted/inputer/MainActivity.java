@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        TWindowManager.removeFloatBtn(this);
+        TWindowManager.hideFloatBtn();
     }
 
     @Override

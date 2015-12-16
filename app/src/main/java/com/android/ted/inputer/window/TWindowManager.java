@@ -16,25 +16,29 @@ import com.cocosw.favor.FavorAdapter;
  * 圆形提示视图
  */
 public class TWindowManager {
-    private static FloatWindowView mFloatBtnView;
+    private static FloatWindowView mFloatBtnView = null;
     private static LayoutParams mFloatBtnViewParams;
-    private static WindowManager mWindowManager;
 
     /**
      * 创建一个小悬浮窗。初始位置为屏幕的右部中间位置。
      *
      * @param context 必须为应用程序的Context.
      */
-    public static void createFloatBtnWindow(Context context, FloatWindowView.OnClickListener onClickListener) {
+    public static void showFloatBtnWindow(Context context, FloatWindowView.OnClickListener onClickListener,
+                                          FloatWindowView.FloatBtnType type) {
         if (mFloatBtnView == null) {
             mFloatBtnView = new FloatWindowView(context);
-            mFloatBtnView.initFloatBtnView(FloatWindowView.FloatBtnType.SUGGEST,onClickListener);
+            mFloatBtnView.initFloatBtnView(type,onClickListener);
             if (mFloatBtnViewParams == null)
                 mFloatBtnViewParams = makeFloatBtnParams(context);
             mFloatBtnView.setParams(mFloatBtnViewParams);
             getWindowManager(context).addView(mFloatBtnView, mFloatBtnViewParams);
-            mFloatBtnView.animate().scaleX(1.0F).scaleY(1.0F).setDuration(250L).start();
+        }else {
+            if(!type.equals(mFloatBtnView.getFloatBtnType())){
+               mFloatBtnView.setFloatBtnType(type);
+            }
         }
+        mFloatBtnView.animate().scaleX(1.0F).scaleY(1.0F).setDuration(250L).start();
     }
 
     private static LayoutParams makeFloatBtnParams(Context context) {
@@ -55,18 +59,15 @@ public class TWindowManager {
         layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
         layoutParams.width = LayoutParams.WRAP_CONTENT;
         layoutParams.height = LayoutParams.WRAP_CONTENT;
-        layoutParams.alpha = 0.8f;
+        layoutParams.alpha = 0.9f;
         layoutParams.x = lastX;
         layoutParams.y = lastY;
-        //layoutParams.windowAnimations=android.R.style.Animation_Activity;
         return layoutParams;
     }
 
-    public static void removeFloatBtn(Context context) {
+    public static void hideFloatBtn() {
         if (mFloatBtnView != null) {
-            WindowManager windowManager = getWindowManager(context);
-            windowManager.removeView(mFloatBtnView);
-            mFloatBtnView = null;
+            mFloatBtnView.animate().scaleX(0.0F).scaleY(0.0F).setDuration(250L).start();
         }
     }
 
@@ -75,15 +76,13 @@ public class TWindowManager {
      *
      * @return 有悬浮窗显示在桌面上返回true，没有的话返回false。
      */
+    @Deprecated
     public static boolean isWindowShowing() {
         return mFloatBtnView != null;
     }
 
 
     private static WindowManager getWindowManager(Context context) {
-        if (mWindowManager == null) {
-            mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        }
-        return mWindowManager;
+        return (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     }
 }

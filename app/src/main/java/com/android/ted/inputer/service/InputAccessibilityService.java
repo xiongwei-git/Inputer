@@ -39,7 +39,7 @@ public class InputAccessibilityService extends AccessibilityService
         @Override
         public boolean handleMessage(Message msg) {
             if(msg.what == MSG_HIDE_BTN){
-                TWindowManager.removeFloatBtn(mContext);
+                TWindowManager.hideFloatBtn();
             }
             return false;
         }
@@ -48,19 +48,22 @@ public class InputAccessibilityService extends AccessibilityService
     @Override
     public void onClickBtn(FloatWindowView.FloatBtnType type) {
         mDataOperator.onExpand();
+        mHandler.removeMessages(MSG_HIDE_BTN);
+        TWindowManager.hideFloatBtn();
     }
 
     @Override
     public void onMatchPart() {
-        if (TWindowManager.isWindowShowing()) return;
-        TWindowManager.createFloatBtnWindow(mContext,this);
+        TWindowManager.showFloatBtnWindow(mContext,this, FloatWindowView.FloatBtnType.SUGGEST);
         mHandler.removeMessages(MSG_HIDE_BTN);
-        mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000l);
+        mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000L);
     }
 
     @Override
     public void onMatchAll() {
-
+        TWindowManager.showFloatBtnWindow(mContext,this, FloatWindowView.FloatBtnType.SELECT);
+        mHandler.removeMessages(MSG_HIDE_BTN);
+        mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000L);
     }
 
     @Override
