@@ -34,8 +34,7 @@ public class GlobalCache {
         }
         return self;
     }
-    //用户是否开启了无障碍功能
-    private boolean isAccessibilitySupport = false;
+
     //是否绕行模式过滤App
     private boolean isAppFilterRound = false;
     private ArrayList<String> mAppPackageNameList = new ArrayList<>();
@@ -46,14 +45,6 @@ public class GlobalCache {
 
     public void setAppFilterRound(boolean appFilterRound) {
         isAppFilterRound = appFilterRound;
-    }
-
-    public boolean isAccessibilitySupport() {
-        return isAccessibilitySupport;
-    }
-
-    public void setAccessibilitySupport(boolean accessibilitySupport) {
-        isAccessibilitySupport = accessibilitySupport;
     }
 
     public ArrayList<String> getAppPackageNameList() {

@@ -14,15 +14,13 @@
  *    limitations under the License.
  */
 
-package com.android.ted.inputer.model;
+package com.android.ted.inputer.base;
 
 /**
- * Created by Ted on 2015/12/16.
- * Constants
+ * Created by Ted on 2015/12/17.
+ *
+ * @ com.android.ted.inputer.base
+ * 所有中介者的基类，用来传递Presenter到View的数据
  */
-public class Constants {
-    public static int OVERLAY_PERMISSION_REQ_CODE = 0x0001;
-    public static int ACCESSIBILITY_PERMISSION_REQ_CODE = 0x0002;
-
-    public static String ACCESSIBILITY_SERVICE_NAME = "/.service.InputAccessibilityService";
+public interface BaseMediator {
 }

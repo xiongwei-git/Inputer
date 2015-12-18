@@ -16,43 +16,88 @@
 
 package com.android.ted.inputer.main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.ted.inputer.R;
+import com.android.ted.inputer.base.BaseActivity;
+import com.android.ted.inputer.db.SharePreData;
 import com.android.ted.inputer.model.Constants;
-import com.android.ted.inputer.util.TLog;
-import com.android.ted.inputer.util.VersionUtil;
-import com.android.ted.inputer.window.TWindowManager;
+import com.cocosw.favor.FavorAdapter;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements MainMediator, View.OnClickListener {
 
+    private SharePreData mSharePreData;
     private RelativeLayout mSwitchBar;
+    private MainPresenter mMainPresenter;
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.switch_bar:
-
+                boolean isChecked = !mSharePreData.getAppStatus();
+                updateSwitchBarData(isChecked);
                 break;
             default:
                 break;
         }
     }
 
+    private DialogInterface.OnClickListener mDrawOverlaysDialogListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            mSharePreData.setCheckDrawOverlays(true);
+            if (which == -1)
+                mMainPresenter.setDrawOverlays();
+        }
+    };
+
+    private DialogInterface.OnClickListener mAccessibilityDialogListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            mMainPresenter.setAccessibilityPermission();
+        }
+    };
+
+    private CompoundButton.OnCheckedChangeListener mSwitchOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            updateSwitchBarData(isChecked);
+        }
+    };
+
+    @Override
+    public void showDrawOverlaysDialog() {
+        new AlertDialog.Builder(this).setTitle(R.string.system_alter_permission_rationale_dialog_title)
+                .setMessage(R.string.system_alert_permission_rationale_dialog_text)
+                .setPositiveButton(R.string.open_settings, mDrawOverlaysDialogListener)
+                .setNegativeButton(R.string.cancel, null)
+                .setCancelable(false)
+                .show();
+    }
+
+    @Override
+    protected void initPresenter() {
+        mMainPresenter = new MainPresenter(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mSharePreData = new FavorAdapter.Builder(this).build().create(SharePreData.class);
+
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,8 +108,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        mSwitchBar = (RelativeLayout)findViewById(R.id.switch_bar);
+        mSwitchBar = (RelativeLayout) findViewById(R.id.switch_bar);
         mSwitchBar.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -75,10 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -91,26 +134,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        canDrawOverlays();
+        if (!mSharePreData.isCheckDrawOverlays()) {
+            mMainPresenter.canDrawOverlays();
+        }
+        updateAccessibilitySwitchBar();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.OVERLAY_PERMISSION_REQ_CODE) {
-            canDrawOverlays();
+            if (!mSharePreData.isCheckDrawOverlays()) {
+                mMainPresenter.canDrawOverlays();
+            }
+        } else if (requestCode == Constants.ACCESSIBILITY_PERMISSION_REQ_CODE) {
+            updateAccessibilitySwitchBar();
         }
     }
 
     /***
-     * 检测是否支持windows显示
+     * 刷新无障碍权限的切换开关状态
      */
-    private void canDrawOverlays() {
-        if (VersionUtil.isM()) {
-            if (!Settings.canDrawOverlays(this)) {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        Uri.parse("package:" + getPackageName()));
-                startActivityForResult(intent, Constants.OVERLAY_PERMISSION_REQ_CODE);
+    private void updateAccessibilitySwitchBar() {
+        boolean appStatus = mSharePreData.getAppStatus();
+        boolean hasPermission = mMainPresenter.isSupportAccessibility();
+        ((TextView) mSwitchBar.findViewById(R.id.status_text)).setText(appStatus && hasPermission ? "开" : "关");
+        mSwitchBar.findViewById(R.id.accessibility_service_disabled_warning).setVisibility(hasPermission ? View.GONE : View.VISIBLE);
+        ((Switch) mSwitchBar.findViewById(R.id.status_switch)).setOnCheckedChangeListener(mSwitchOnCheckedChangeListener);
+        ((Switch) mSwitchBar.findViewById(R.id.status_switch)).setChecked(appStatus && hasPermission);
+    }
+
+    /***
+     * 更新switch bar 对应的数据
+     *
+     * @param isChecked 当前switch bar 是否被选中
+     */
+    private void updateSwitchBarData(boolean isChecked) {
+        if (isChecked) {
+            if (mMainPresenter.isSupportAccessibility()) {
+                mSharePreData.setAppStatus(true);
+                updateAccessibilitySwitchBar();
+            } else {
+                new AlertDialog.Builder(this).setTitle(R.string.system_alter_permission_rationale_dialog_title)
+                        .setMessage(R.string.system_alert_permission_rationale_dialog_text)
+                        .setPositiveButton(R.string.open_settings, mAccessibilityDialogListener)
+                        .setNegativeButton(R.string.cancel, null)
+                        .setCancelable(false)
+                        .show();
             }
+        } else {
+            mSharePreData.setAppStatus(false);
+            updateAccessibilitySwitchBar();
         }
     }
 }

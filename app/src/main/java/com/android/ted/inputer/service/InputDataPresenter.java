@@ -27,14 +27,14 @@ import com.android.ted.inputer.model.GlobalCache;
  * Created by Ted on 2015/12/2.
  * InputDataOperator
  */
-public class InputDataOperator {
+public class InputDataPresenter {
     private InputDataInterface mDataInterface;
 
     private AccessibilityNodeInfo mFocusNodeInfo;
     private String mFocusRecord = "xiongwei";
     //private String
 
-    public InputDataOperator(InputDataInterface dataInterface) {
+    public InputDataPresenter(InputDataInterface dataInterface) {
         this.mDataInterface = dataInterface;
     }
 

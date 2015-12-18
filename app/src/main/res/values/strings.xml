@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Inputer</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="system_alert_permission_rationale_dialog_text">为了您的正常使用 <b>\“在其他应用上层显示\”</b> 权限需要打开，否则您将无法体验到所有功能。您也可在<b>\“更多\”-\“设置\”</b>中重新打开或者关闭。</string>
+    <string name="system_alter_permission_rationale_dialog_title">打开悬浮按钮功能</string>
+    <string name="open_settings">打开设置</string>
+
+
+
     <string name="action_settings">Settings</string>
     <string name="accessibility_service_description">accessibility_service_description</string>
     <string name="template_screen_on">Screen on. Volume %1$s percent.</string>
@@ -86,7 +94,7 @@
     <string name="not_used_phraseRow">Not used yet</string>
     <string name="off">OFF</string>
     <string name="on">ON</string>
-    <string name="open_settings">Open settings</string>
+
     <string name="open_source_dialog_title">Open Source Libraries</string>
     <string name="permission_group_title">Texpand</string>
     <string name="phrase_contains_shortcut_error_message">Phrase contains shortcut</string>
@@ -197,8 +205,7 @@
     <string name="sort_type_ascending">Ascending</string>
     <string name="sort_type_descending">Descending</string>
     <string name="suggestions">Suggestions</string>
-    <string name="system_alert_permission_rationale_dialog_text">To enable floating bubble <b>\"Draw over other apps\"</b> permission has to be granted. You will not be able to use some features if the permission is denied.</string>
-    <string name="system_alter_permission_rationale_dialog_title">Enable floating bubble</string>
+
     <string name="tell_your_friends_message_info">You saved %s characters with Texpand. Share it with your friends.</string>
     <string name="texpand_pro_available_dialog_message">Texpand Pro is installed, it is highly recommended that you <b>uninstall the free version of Texpand to avoid conflicts</b></string>
     <string name="texpand_pro_available_dialog_title">Texpand Pro Installed!</string>
@@ -217,4 +224,5 @@
     <string name="year_short_anchor">Year (short)</string>
     <string name="yes_sure">Yes, sure</string>
     <string name="your_achievements">Your Texpand Achievements</string>
+
 </resources>

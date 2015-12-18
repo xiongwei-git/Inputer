@@ -18,7 +18,7 @@ package com.android.ted.inputer.main;
 
 import android.app.Application;
 
-import com.android.ted.inputer.util.TLog;
+import com.orhanobut.logger.Logger;
 
 /**
  * Created by Ted on 2015/12/16.
@@ -28,6 +28,6 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        TLog.init();
+        Logger.init("xiongwei").methodCount(1);
     }
 }

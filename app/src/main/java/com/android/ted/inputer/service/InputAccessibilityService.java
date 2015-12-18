@@ -35,7 +35,7 @@ public class InputAccessibilityService extends AccessibilityService
     private final int MSG_HIDE_BTN = 0x001;
 
     private Context mContext;
-    private InputDataOperator mDataOperator;
+    private InputDataPresenter mDataOperator;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -75,20 +75,18 @@ public class InputAccessibilityService extends AccessibilityService
 
     @Override
     public void onServiceConnected() {
+
         mContext = this;
-        mDataOperator = new InputDataOperator(this);
-        GlobalCache.getInstance().setAccessibilitySupport(true);
+        mDataOperator = new InputDataPresenter(this);
     }
 
     @Override
     public void onInterrupt() {
-        GlobalCache.getInstance().setAccessibilitySupport(false);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        GlobalCache.getInstance().setAccessibilitySupport(false);
         mContext = null;
         mDataOperator = null;
     }

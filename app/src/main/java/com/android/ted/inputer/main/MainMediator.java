@@ -14,31 +14,16 @@
  *    limitations under the License.
  */
 
-package com.android.ted.inputer.util;
+package com.android.ted.inputer.main;
 
-import com.android.ted.inputer.BuildConfig;
-import com.orhanobut.logger.Logger;
+import com.android.ted.inputer.base.BaseMediator;
 
 /**
- * Created by Ted on 2015/12/16.
- * TLog
+ * Created by Ted on 2015/12/17.
+ *
+ * @ com.android.ted.inputer.main
+ * For
  */
-public class TLog {
-    private static boolean isShowLog = false;
-
-    public static void init(){
-        isShowLog = BuildConfig.LOG_DEBUG;
-        Logger.init("xiongwei").methodCount(1);
-    }
-
-    public static void d(String message){
-        if(!isShowLog)return;
-        Logger.d(message,"");
-    }
-
-    public static void e(String message){
-        if(!isShowLog)return;
-        Logger.e(message,"");
-    }
-
+public interface MainMediator extends BaseMediator {
+    void showDrawOverlaysDialog();
 }
