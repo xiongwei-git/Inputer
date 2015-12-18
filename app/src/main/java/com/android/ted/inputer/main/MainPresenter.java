@@ -43,13 +43,15 @@ public class MainPresenter {
     /***
      * 检测是否支持windows显示
      */
-    public void canDrawOverlays() {
+    public boolean canDrawOverlays() {
         if (VersionUtil.isM()) {
             MainActivity mainActivity = (MainActivity) mMainMediator;
             if (!Settings.canDrawOverlays(mainActivity)) {
                 mMainMediator.showDrawOverlaysDialog();
+                return false;
             }
         }
+        return true;
     }
 
     /***

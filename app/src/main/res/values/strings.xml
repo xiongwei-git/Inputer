@@ -5,6 +5,8 @@
     <string name="system_alert_permission_rationale_dialog_text">为了您的正常使用 <b>\“在其他应用上层显示\”</b> 权限需要打开，否则您将无法体验到所有功能。您也可在<b>\“更多\”-\“设置\”</b>中重新打开或者关闭。</string>
     <string name="system_alter_permission_rationale_dialog_title">打开悬浮按钮功能</string>
     <string name="open_settings">打开设置</string>
+    <string name="enable_accessibility_dialog_title">权限设置</string>
+    <string name="enable_accessibility_service_message">请在 <b>无障碍</b> 设置中打开应用授权</string>
 
 
 
@@ -56,8 +58,7 @@
     <string name="description_field_hint">Description (Optional)</string>
     <string name="discard">Discard</string>
     <string name="empty_phrase_discarded">Empty phrase discarded</string>
-    <string name="enable_accessibility_dialog_title">Required permission</string>
-    <string name="enable_accessibility_service_message">Go to <b>Accessibility Settings</b> and enable Texpand to start text expansion</string>
+
     <string name="enjoying_texpand_title">Enjoying Texpand?</string>
     <string name="expands_immediately">Expands immediately</string>
     <string name="expands_within_words">Expands within words</string>

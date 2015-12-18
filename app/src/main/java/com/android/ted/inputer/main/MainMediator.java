@@ -26,4 +26,5 @@ import com.android.ted.inputer.base.BaseMediator;
  */
 public interface MainMediator extends BaseMediator {
     void showDrawOverlaysDialog();
+    void showAccessibilityDialog();
 }

@@ -60,13 +60,19 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
             mSharePreData.setCheckDrawOverlays(true);
             if (which == -1)
                 mMainPresenter.setDrawOverlays();
+            else
+                updateAccessibilitySwitchBar();
         }
     };
 
     private DialogInterface.OnClickListener mAccessibilityDialogListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            mMainPresenter.setAccessibilityPermission();
+            mSharePreData.setCheckAccessibility(true);
+            if (which == -1)
+                mMainPresenter.setAccessibilityPermission();
+            else
+                updateAccessibilitySwitchBar();
         }
     };
 
@@ -82,7 +88,17 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
         new AlertDialog.Builder(this).setTitle(R.string.system_alter_permission_rationale_dialog_title)
                 .setMessage(R.string.system_alert_permission_rationale_dialog_text)
                 .setPositiveButton(R.string.open_settings, mDrawOverlaysDialogListener)
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(R.string.cancel, mDrawOverlaysDialogListener)
+                .setCancelable(false)
+                .show();
+    }
+
+    @Override
+    public void showAccessibilityDialog() {
+        new AlertDialog.Builder(this).setTitle(R.string.enable_accessibility_dialog_title)
+                .setMessage(R.string.enable_accessibility_service_message)
+                .setPositiveButton(R.string.open_settings, mAccessibilityDialogListener)
+                .setNegativeButton(R.string.cancel, mAccessibilityDialogListener)
                 .setCancelable(false)
                 .show();
     }
@@ -134,8 +150,12 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
     @Override
     protected void onResume() {
         super.onResume();
-        if (!mSharePreData.isCheckDrawOverlays()) {
-            mMainPresenter.canDrawOverlays();
+        if (!mSharePreData.isCheckDrawOverlays() && !mMainPresenter.canDrawOverlays()) {
+            return;
+        }
+        if (!mSharePreData.isCheckAccessibility() && !mMainPresenter.isSupportAccessibility()) {
+            showAccessibilityDialog();
+            return;
         }
         updateAccessibilitySwitchBar();
     }
@@ -170,16 +190,11 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
      */
     private void updateSwitchBarData(boolean isChecked) {
         if (isChecked) {
+            mSharePreData.setAppStatus(true);
             if (mMainPresenter.isSupportAccessibility()) {
-                mSharePreData.setAppStatus(true);
                 updateAccessibilitySwitchBar();
             } else {
-                new AlertDialog.Builder(this).setTitle(R.string.system_alter_permission_rationale_dialog_title)
-                        .setMessage(R.string.system_alert_permission_rationale_dialog_text)
-                        .setPositiveButton(R.string.open_settings, mAccessibilityDialogListener)
-                        .setNegativeButton(R.string.cancel, null)
-                        .setCancelable(false)
-                        .show();
+                showAccessibilityDialog();
             }
         } else {
             mSharePreData.setAppStatus(false);
