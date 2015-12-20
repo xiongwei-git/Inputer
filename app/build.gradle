@@ -13,7 +13,22 @@ android {
     }
 
     productFlavors {
-        develop {}
+        develop {
+            resValue "string", "app_name","Inputer"
+        }
+        loader{
+            applicationId "com.android.ted.inputer.loader"
+            resValue "string", "app_name","Inputer(loader)"
+            minSdkVersion 21
+        }
+        rxjava{
+            applicationId "com.android.ted.inputer.rxjava"
+            resValue "string", "app_name","Inputer(rxjava)"
+
+            minSdkVersion 21
+
+        }
+
     }
 
     signingConfigs {
@@ -27,6 +42,7 @@ android {
             keyAlias "ted_android"
             keyPassword "xiongwei"
         }
+
     }
 
     buildTypes {
@@ -50,4 +66,7 @@ dependencies {
     compile 'com.cocosw:favor:0.2.0@aar'
     compile 'com.getbase:floatingactionbutton:1.10.1'
     compile 'com.github.orhanobut:logger:1.12'
+
+    rxjavaCompile 'io.reactivex:rxandroid:1.1.0'
+    rxjavaCompile 'io.reactivex:rxjava:1.1.0'
 }

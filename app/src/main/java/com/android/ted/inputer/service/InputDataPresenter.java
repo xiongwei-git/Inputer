@@ -22,21 +22,26 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.android.ted.inputer.model.GlobalCache;
+import com.android.ted.inputer.util.KeyWordInterface;
+import com.android.ted.inputer.util.KeyWordUtil;
 
 /**
  * Created by Ted on 2015/12/2.
  * InputDataOperator
  */
-public class InputDataPresenter {
+public class InputDataPresenter   {
     private InputDataInterface mDataInterface;
 
     private AccessibilityNodeInfo mFocusNodeInfo;
     private String mFocusRecord = "xiongwei";
-    //private String
+    private KeyWordUtil mKeyWordUtil;
 
     public InputDataPresenter(InputDataInterface dataInterface) {
         this.mDataInterface = dataInterface;
+        mKeyWordUtil = new KeyWordUtil();
     }
+
+
 
     /***
      * 处理无障碍消息事件
@@ -64,7 +69,7 @@ public class InputDataPresenter {
         mFocusNodeInfo.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_TEXT.getId(), arguments);
     }
 
-    public void onRepeal(){
+    public void onRepeal() {
         if (mFocusNodeInfo == null) return;
         if (TextUtils.isEmpty(mFocusRecord)) return;
     }
@@ -76,7 +81,7 @@ public class InputDataPresenter {
         if (source == null) {
             return;
         }
-        AccessibilityNodeInfo editView = getEditTextNodeInfo(source);
+        final AccessibilityNodeInfo editView = getEditTextNodeInfo(source);
         if (null != editView && null != editView.getText()) {
             String text = editView.getText().toString();
             if (text.equals("12")) {
@@ -88,6 +93,19 @@ public class InputDataPresenter {
                 mFocusRecord = "xiongwei";
                 mDataInterface.onMatchAll();
             }
+
+
+            mKeyWordUtil.readTextKeyWordFromDb(text, new KeyWordInterface() {
+
+                @Override
+                public void getKeyWordSuccess(boolean isSuccess, String word) {
+                    if (isSuccess){
+                        mFocusRecord = word;
+                        mDataInterface.onMatchAll();
+                        mFocusNodeInfo = editView;
+                    }
+                }
+            });
         }
     }
 
@@ -129,5 +147,11 @@ public class InputDataPresenter {
         if (TextUtils.isEmpty(packageName))
             packageName = "com.android.ted.inputer";
         return packageName;
+    }
+
+    public void onDestroy() {
+        if (mKeyWordUtil != null) {
+            mKeyWordUtil.onDestroy();
+        }
     }
 }

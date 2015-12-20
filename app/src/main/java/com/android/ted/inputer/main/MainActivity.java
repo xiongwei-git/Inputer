@@ -121,6 +121,14 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TestAct.class));
+            }
+        });
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                return true;
             }
         });
 
