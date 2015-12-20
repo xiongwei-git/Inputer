@@ -26,9 +26,7 @@
             android:screenOrientation="portrait"
             >
         </activity>
-        <activity android:name=".main.OrderActivity">
 
-        </activity>
         <service
             android:name=".service.InputAccessibilityService"
             android:description="@string/app_name"
@@ -44,8 +42,8 @@
         </service>
 
         <provider
-            android:authorities="com.aheadlcx.niceloader"
-            android:name=".db.opt.DataProvider">
+            android:authorities="${PROVIDER_AUTHORITIES}"
+            android:name=".util.DataProvider">
             <grant-uri-permission android:pathPattern=".*"/>
         </provider>
     </application>

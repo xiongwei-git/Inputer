@@ -1,4 +1,4 @@
-package com.android.ted.inputer.db.opt;
+package com.android.ted.inputer.util;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
+import com.android.ted.inputer.BuildConfig;
 import com.android.ted.inputer.db.DBManager;
 import com.android.ted.inputer.db.DbHelper;
 import com.android.ted.inputer.db.KeyWordTable;
@@ -24,7 +25,7 @@ public class DataProvider extends ContentProvider {
 
     public static Object DBlock = new Object();
 
-    public static final String AUTHORITY = "com.aheadlcx.niceloader";
+    public static final String AUTHORITY = BuildConfig.LOADER_AUTHORITIES;
 
     public static final String SCHEME = "content://";
 
@@ -105,7 +106,7 @@ public class DataProvider extends ContentProvider {
             String table = matchTable(uri);
             SQLiteDatabase db = getmDbHelper().getWritableDatabase();
             long rowId = 0;
-             rowId = db.insert(table, null, values);
+            rowId = db.insert(table, null, values);
             if (rowId > 0){
                 getContext().getContentResolver().notifyChange(uri, null);
                 Uri returnUri = ContentUris.withAppendedId(uri, rowId);

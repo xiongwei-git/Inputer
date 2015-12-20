@@ -26,18 +26,15 @@ public class KeyWordTableOpt {
         SQLiteDatabase db = DBManager.getInstance().getDbHelper().getReadableDatabase();
         String sql = " select * from " + KeyWordTable.TABLE_NAME + " where " +
                 KeyWordTable.KEY + " = ? ";
-        String where = KeyWordTable.KEY + " = ?";
         String[] args = new String[]{key};
         Cursor cursor = db.rawQuery(sql, args);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
-            int cursorCount = cursor.getCount();
             while (!cursor.isAfterLast()) {
                 item = new KeyWordTb();
                 item.key = key;
                 int indexWord = cursor.getColumnIndex(KeyWordTable
                         .WORD);
-                Log.e("db", "indexWord =  " + indexWord);
                 item.word = cursor.getString(indexWord);
 
                 int indexId = cursor.getColumnIndex(KeyWordTable

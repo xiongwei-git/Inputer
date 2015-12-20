@@ -23,4 +23,5 @@ public interface InputDataInterface {
     void onMatchPart();
     void onMatchAll();
     void onTextChanged();
+    void onMatchNothing();
 }

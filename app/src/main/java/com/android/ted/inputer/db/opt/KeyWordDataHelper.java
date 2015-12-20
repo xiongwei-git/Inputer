@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.android.ted.inputer.db.KeyWordTable;
 import com.android.ted.inputer.db.KeyWordTb;
+import com.android.ted.inputer.util.DataProvider;
 
 import java.util.ArrayList;
 
@@ -62,6 +63,19 @@ public class KeyWordDataHelper extends BaseDataHelper {
 
         }
         return results;
+    }
+
+    public String queryWord(String key){
+        ArrayList<KeyWordTb> querys = query(key);
+        if (querys == null) {
+            return null;
+        }
+        for (KeyWordTb item : querys) {
+            if (item.key != null && item.key == key){
+                return item.word;
+            }
+        }
+        return null;
     }
 
     public int delete(String key) {

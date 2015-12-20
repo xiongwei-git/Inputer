@@ -13,23 +13,24 @@ android {
     }
 
     productFlavors {
-        develop {
-            resValue "string", "app_name","Inputer"
-        }
-        loader{
+        loader {
+            buildConfigField("String", "LOADER_AUTHORITIES", "\"com.aheadlcx.niceloader.loader\"")
+            manifestPlaceholders = [PROVIDER_AUTHORITIES: "com.aheadlcx.niceloader.loader"]
             applicationId "com.android.ted.inputer.loader"
-            resValue "string", "app_name","Inputer(loader)"
+            resValue "string", "app_name", "Inputer(loader)"
             minSdkVersion 21
         }
-        rxjava{
+
+        rxjava {
+            buildConfigField("String", "LOADER_AUTHORITIES", "\"com.aheadlcx.niceloader.rxjava\"")
+            manifestPlaceholders = [PROVIDER_AUTHORITIES: "com.aheadlcx.niceloader.rxjava"]
             applicationId "com.android.ted.inputer.rxjava"
-            resValue "string", "app_name","Inputer(rxjava)"
-
+            resValue "string", "app_name", "Inputer(rxjava)"
             minSdkVersion 21
-
         }
-
     }
+
+
 
     signingConfigs {
         debug {
@@ -45,6 +46,7 @@ android {
 
     }
 
+
     buildTypes {
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
@@ -58,6 +60,7 @@ android {
         }
     }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

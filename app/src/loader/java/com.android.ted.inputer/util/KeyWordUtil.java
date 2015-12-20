@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 
 import com.android.ted.inputer.db.KeyWordTable;
-import com.android.ted.inputer.db.opt.DataProvider;
 import com.android.ted.inputer.main.MainApplication;
-import com.orhanobut.logger.Logger;
 
 /**
  * Description:
@@ -33,7 +31,7 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
         return this;
     }
 
-    public void readTextKeyWordFromDb(String key, KeyWordInterface callBack) {
+    public KeyWordUtil readTextKeyWordFromDb(String key, KeyWordInterface callBack) {
         curKey = key;
         mCallBack = callBack;
         if (mCursorLoader == null) {
@@ -46,13 +44,13 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
         mCursorLoader.setSelection(KeyWordTable.KEY + " =?");
         mCursorLoader.setSelectionArgs(new String[]{key});
         mCursorLoader.startLoading();
+        return this;
     }
 
     @Override
     public void onLoadComplete(Loader<Cursor> loader, Cursor cursor) {
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
-            int cursorCount = cursor.getCount();
             while (!cursor.isAfterLast()) {
                 int indexWord = cursor.getColumnIndex(KeyWordTable
                         .WORD);
@@ -62,6 +60,7 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
                 String word = cursor.getString(indexWord);
                 if (!TextUtils.isEmpty(curKey) && key.equals(curKey)) {
                     if (mCallBack != null) {
+                        boolean isSuccess = TextUtils.isEmpty(word) ? false : true;
                         mCallBack.getKeyWordSuccess(true, word);
                     }
                 }

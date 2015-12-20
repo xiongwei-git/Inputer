@@ -59,6 +59,11 @@ public class InputAccessibilityService extends AccessibilityService
     }
 
     @Override
+    public void onMatchNothing() {
+        mHandler.removeMessages(MSG_HIDE_BTN);
+    }
+
+    @Override
     public void onMatchPart() {
         TWindowManager.showFloatBtnWindow(mContext,this, FloatWindowView.FloatBtnType.SUGGEST);
         mHandler.removeMessages(MSG_HIDE_BTN);
@@ -71,6 +76,8 @@ public class InputAccessibilityService extends AccessibilityService
         mHandler.removeMessages(MSG_HIDE_BTN);
         mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000L);
     }
+
+
 
     @Override
     public void onServiceConnected() {

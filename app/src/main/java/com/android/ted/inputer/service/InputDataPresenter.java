@@ -103,6 +103,8 @@ public class InputDataPresenter   {
                         mFocusRecord = word;
                         mDataInterface.onMatchAll();
                         mFocusNodeInfo = editView;
+                    }else {
+                        mDataInterface.onMatchNothing();
                     }
                 }
             });

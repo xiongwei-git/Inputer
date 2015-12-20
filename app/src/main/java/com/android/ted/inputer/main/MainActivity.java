@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -135,6 +136,15 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
         mSwitchBar = (RelativeLayout) findViewById(R.id.switch_bar);
         mSwitchBar.setOnClickListener(this);
 
+        final Snackbar snackbar = Snackbar.make(fab, "click the red button,and enjoy it", Snackbar
+                .LENGTH_LONG);
+        snackbar.show();
+        snackbar.setAction("I know it", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            snackbar.dismiss();
+            }
+        });
 
     }
 
