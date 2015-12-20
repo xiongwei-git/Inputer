@@ -8,7 +8,9 @@ import com.android.ted.inputer.main.MainApplication;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 /**
  * Description:
@@ -40,7 +42,7 @@ public class KeyWordUtil {
                 String word = mKeyWordDataHelper.queryWord(key);
                 return Observable.just(word);
             }
-        }).subscribe(new Subscriber<String>() {
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<String>() {
             @Override
             public void onCompleted() {
 
