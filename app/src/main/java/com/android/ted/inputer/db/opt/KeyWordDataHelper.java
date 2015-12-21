@@ -32,14 +32,13 @@ public class KeyWordDataHelper extends BaseDataHelper {
 
     public ArrayList<KeyWordTb> query(String key) {
         ArrayList<KeyWordTb> results = new ArrayList<>();
-        KeyWordTb item = null;
+        KeyWordTb item;
 
-        Cursor cursor = query(DataProvider.KEYWORDS_CONTENT_URI, null, KeyWordTable.KEY + " = ?", new
+        Cursor cursor = query( null, KeyWordTable.KEY + " = ?", new
                 String[]{key}, null);
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
-            int cursorCount = cursor.getCount();
             while (!cursor.isAfterLast()) {
                 item = new KeyWordTb();
                 item.key = key;
@@ -48,8 +47,7 @@ public class KeyWordDataHelper extends BaseDataHelper {
                 Log.e("db", "indexWord =  " + indexWord);
                 item.word = cursor.getString(indexWord);
 
-                int indexId = cursor.getColumnIndex(KeyWordTable
-                        ._ID);
+                int indexId = cursor.getColumnIndex(KeyWordTable._ID);
                 item._ID = cursor.getInt(indexId);
                 results.add(item);
                 cursor.moveToNext();
@@ -60,18 +58,19 @@ public class KeyWordDataHelper extends BaseDataHelper {
                 cursor.close();
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return results;
     }
 
-    public String queryWord(String key){
-        ArrayList<KeyWordTb> querys = query(key);
-        if (querys == null) {
+    @SuppressWarnings("unused")
+    public String queryWord(String key) {
+        ArrayList<KeyWordTb> queryList = query(key);
+        if (queryList == null) {
             return null;
         }
-        for (KeyWordTb item : querys) {
-            if (item.key != null && item.key == key){
+        for (KeyWordTb item : queryList) {
+            if (item.key != null && item.key.equals(key)) {
                 return item.word;
             }
         }
@@ -79,22 +78,19 @@ public class KeyWordDataHelper extends BaseDataHelper {
     }
 
     public int delete(String key) {
-        int delete = delete(DataProvider.KEYWORDS_CONTENT_URI, KeyWordTable.KEY + " = ?", new
-                String[]{key});
-        return delete;
+        return delete(KeyWordTable.KEY + " = ?", new String[]{key});
     }
 
     public Uri insert(KeyWordTb keyWordTb) {
         ContentValues values = new ContentValues();
         values.put(KeyWordTable.KEY, keyWordTb.key);
         values.put(KeyWordTable.WORD, keyWordTb.word);
-        Uri insert = insert(values);
-        return insert;
+        return insert(values);
     }
 
     public Uri removeTheSameAndSaveNew(@NonNull KeyWordTb keyWordTb) {
         ArrayList<KeyWordTb> query = query(keyWordTb.key);
-        if (query != null && query.size() > 0){
+        if (query != null && query.size() > 0) {
             delete(keyWordTb.key);
         }
 

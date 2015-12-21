@@ -66,21 +66,21 @@ public class MainPresenter {
         }
     }
 
-    public void setAccessibilityPermission(){
+    public void setAccessibilityPermission() {
         MainActivity mainActivity = (MainActivity) mMainMediator;
         Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
         mainActivity.startActivityForResult(intent, Constants.ACCESSIBILITY_PERMISSION_REQ_CODE);
     }
 
-    public boolean isSupportAccessibility(){
+    public boolean isSupportAccessibility() {
         MainActivity mainActivity = (MainActivity) mMainMediator;
         boolean result = false;
         AccessibilityManager accessibilityManager =
                 (AccessibilityManager) mainActivity.getSystemService(Context.ACCESSIBILITY_SERVICE);
         List<AccessibilityServiceInfo> list =
                 accessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
-        for(AccessibilityServiceInfo info:list){
-            if(info.getId().equals(mainActivity.getPackageName()+Constants.ACCESSIBILITY_SERVICE_NAME))
+        for (AccessibilityServiceInfo info : list) {
+            if (info.getId().equals(mainActivity.getPackageName() + Constants.ACCESSIBILITY_SERVICE_NAME))
                 result = true;
         }
         return result;

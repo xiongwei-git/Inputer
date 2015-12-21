@@ -26,16 +26,10 @@ import com.orhanobut.logger.Logger;
  * MainApplication
  */
 public class MainApplication extends Application {
-    private static MainApplication sMainApplication;
     @Override
     public void onCreate() {
         super.onCreate();
-        sMainApplication = this;
         Logger.init("xiongwei").methodCount(1);
         LoaderSdk.getInstance().init(this);
-    }
-
-    public static MainApplication getIntance(){
-        return sMainApplication;
     }
 }

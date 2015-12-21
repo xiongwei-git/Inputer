@@ -30,13 +30,13 @@ import com.android.ted.inputer.util.KeyWordUtil;
  * InputDataOperator
  */
 public class InputDataPresenter   {
-    private InputDataInterface mDataInterface;
+    private InputDataMediator mDataInterface;
 
     private AccessibilityNodeInfo mFocusNodeInfo;
     private String mFocusRecord = "xiongwei";
     private KeyWordUtil mKeyWordUtil;
 
-    public InputDataPresenter(InputDataInterface dataInterface) {
+    public InputDataPresenter(InputDataMediator dataInterface) {
         this.mDataInterface = dataInterface;
         mKeyWordUtil = new KeyWordUtil();
     }

@@ -30,7 +30,7 @@ import com.android.ted.inputer.window.TWindowManager;
  * InputAccessibilityService
  */
 public class InputAccessibilityService extends AccessibilityService
-        implements InputDataInterface,FloatWindowView.OnClickListener {
+        implements InputDataMediator,FloatWindowView.OnClickListener {
     private final int MSG_HIDE_BTN = 0x001;
 
     private Context mContext;

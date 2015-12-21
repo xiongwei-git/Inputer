@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 
 import com.android.ted.inputer.db.KeyWordTable;
+import com.android.ted.inputer.db.LoaderSdk;
 import com.android.ted.inputer.main.MainApplication;
 
 /**
@@ -23,7 +24,7 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
     }
 
     public  KeyWordUtil init() {
-        mCursorLoader = new CursorLoader(MainApplication.getIntance());
+        mCursorLoader = new CursorLoader(LoaderSdk.getInstance().getContext());
         mCursorLoader.registerListener(0, this);
         mCursorLoader.setUri(DataProvider.KEYWORDS_CONTENT_URI);
         mCursorLoader.setSortOrder(KeyWordTable._ID + " DESC");
@@ -69,7 +70,8 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
         }
     }
     public void onDestroy() {
-        mCursorLoader.stopLoading();
+        if (null != mCursorLoader)
+            mCursorLoader.stopLoading();
         mCursorLoader = null;
         mCallBack = null;
         curKey = null;

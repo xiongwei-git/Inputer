@@ -142,7 +142,7 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
         snackbar.setAction("I know it", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            snackbar.dismiss();
+                snackbar.dismiss();
             }
         });
 

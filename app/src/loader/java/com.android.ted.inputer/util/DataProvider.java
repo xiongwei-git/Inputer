@@ -21,9 +21,7 @@ import com.android.ted.inputer.db.KeyWordTable;
  */
 public class DataProvider extends ContentProvider {
 
-    public static final String TAG =DataProvider.class.getSimpleName();
-
-    public static Object DBlock = new Object();
+    public static final Object DBlock = new Object();
 
     public static final String AUTHORITY = BuildConfig.LOADER_AUTHORITIES;
 
@@ -33,8 +31,7 @@ public class DataProvider extends ContentProvider {
 
     public static final Uri KEYWORDS_CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_KEYWORDS);
 
-    public static final String KEYWORDS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.aheadlcx" +
-            ".niceloader.keywords";
+    public static final String KEYWORDS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.aheadlcx" + ".niceloader.keywords";
 
     private static final int KEYWORDS = 0;
 
@@ -48,7 +45,7 @@ public class DataProvider extends ContentProvider {
         sUriMatcher.addURI(AUTHORITY, "keywords", KEYWORDS);
     }
 
-    public static DbHelper getmDbHelper(){
+    public static DbHelper getDbHelper(){
         if (mDbHelper == null) {
             mDbHelper = DBManager.getInstance().getDbHelper();
         }
@@ -56,7 +53,7 @@ public class DataProvider extends ContentProvider {
     }
 
     private String matchTable(Uri uri){
-        String table = null;
+        //String table = null;
         int code = sUriMatcher.match(uri);
         switch (code){
             case KEYWORDS:
@@ -72,11 +69,10 @@ public class DataProvider extends ContentProvider {
         return true;
     }
 
-    @Nullable
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@Nullable Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         synchronized (DBlock){
-            SQLiteDatabase db = getmDbHelper().getReadableDatabase();
+            SQLiteDatabase db = getDbHelper().getReadableDatabase();
             String table = matchTable(uri);
             Cursor cursor = db.query(table, projection, selection, selectionArgs, null, null, sortOrder);
 
@@ -86,9 +82,8 @@ public class DataProvider extends ContentProvider {
 
     }
 
-    @Nullable
     @Override
-    public String getType(Uri uri) {
+    public String getType(@Nullable Uri uri) {
         int code = sUriMatcher.match(uri);
         switch (code){
             case KEYWORDS:
@@ -99,12 +94,11 @@ public class DataProvider extends ContentProvider {
 
     }
 
-    @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(@Nullable Uri uri, ContentValues values) {
         synchronized (DBlock){
             String table = matchTable(uri);
-            SQLiteDatabase db = getmDbHelper().getWritableDatabase();
+            SQLiteDatabase db = getDbHelper().getWritableDatabase();
             long rowId = 0;
              rowId = db.insert(table, null, values);
             if (rowId > 0){
@@ -119,12 +113,11 @@ public class DataProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@Nullable Uri uri, String selection, String[] selectionArgs) {
         synchronized (DBlock){
             String table = matchTable(uri);
-            SQLiteDatabase db = getmDbHelper().getWritableDatabase();
-            int count = 0;
-            count = db.delete(table, selection, selectionArgs);
+            SQLiteDatabase db = getDbHelper().getWritableDatabase();
+            int count = db.delete(table, selection, selectionArgs);
             getContext().getContentResolver().notifyChange(uri, null);
             return count;
         }
@@ -134,10 +127,8 @@ public class DataProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         synchronized (DBlock){
             String table = matchTable(uri);
-            SQLiteDatabase db = getmDbHelper().getWritableDatabase();
-            int count = 0;
-            count = db.update(table, values, selection, selectionArgs);
-            return count;
+            SQLiteDatabase db = getDbHelper().getWritableDatabase();
+            return db.update(table, values, selection, selectionArgs);
         }
     }
 }

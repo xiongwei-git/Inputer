@@ -28,13 +28,13 @@ public abstract class BaseDataHelper {
         mContext.getContentResolver().notifyChange(getContentUri(), null);
     }
 
-    protected final Cursor query(Uri uri, String[] projection, String selection,
+    protected final Cursor query(String[] projection, String selection,
                                  String[] selectionArgs, String sortOrder) {
-        return mContext.getContentResolver().query(uri, projection, selection, selectionArgs,
+        return mContext.getContentResolver().query(getContentUri(), projection, selection, selectionArgs,
                 sortOrder);
     }
 
-    protected final int delete(Uri uri, String selection, String[] selectionArgs) {
+    protected final int delete(String selection, String[] selectionArgs) {
         return mContext.getContentResolver().delete(getContentUri(), selection, selectionArgs);
     }
 
