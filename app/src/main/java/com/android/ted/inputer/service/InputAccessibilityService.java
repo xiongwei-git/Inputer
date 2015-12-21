@@ -22,7 +22,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.accessibility.AccessibilityEvent;
 
-import com.android.ted.inputer.model.GlobalCache;
 import com.android.ted.inputer.window.FloatWindowView;
 import com.android.ted.inputer.window.TWindowManager;
 
@@ -60,6 +59,11 @@ public class InputAccessibilityService extends AccessibilityService
     }
 
     @Override
+    public void onMatchNothing() {
+        mHandler.removeMessages(MSG_HIDE_BTN);
+    }
+
+    @Override
     public void onMatchPart() {
         TWindowManager.showFloatBtnWindow(mContext,this, FloatWindowView.FloatBtnType.SUGGEST);
         mHandler.removeMessages(MSG_HIDE_BTN);
@@ -72,6 +76,8 @@ public class InputAccessibilityService extends AccessibilityService
         mHandler.removeMessages(MSG_HIDE_BTN);
         mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000L);
     }
+
+
 
     @Override
     public void onServiceConnected() {
@@ -86,9 +92,10 @@ public class InputAccessibilityService extends AccessibilityService
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        mContext = null;
+        mDataOperator.onDestroy();
         mDataOperator = null;
+        mContext = null;
+        super.onDestroy();
     }
 
     /**

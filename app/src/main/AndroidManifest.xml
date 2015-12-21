@@ -22,6 +22,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".main.TestAct"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
         <service
             android:name=".service.InputAccessibilityService"
             android:description="@string/app_name"
@@ -36,6 +41,11 @@
                 android:resource="@xml/accessibility_service_config"/>
         </service>
 
+        <provider
+            android:authorities="${PROVIDER_AUTHORITIES}"
+            android:name=".util.DataProvider">
+            <grant-uri-permission android:pathPattern=".*"/>
+        </provider>
     </application>
 
 </manifest>
