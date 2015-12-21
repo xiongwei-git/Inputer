@@ -61,8 +61,8 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
                 String word = cursor.getString(indexWord);
                 if (!TextUtils.isEmpty(curKey) && key.equals(curKey)) {
                     if (mCallBack != null) {
-                        boolean isSuccess = TextUtils.isEmpty(word) ? false : true;
-                        mCallBack.getKeyWordSuccess(true, word);
+                        boolean isSuccess = !TextUtils.isEmpty(word);
+                        mCallBack.getKeyWordSuccess(isSuccess, word);
                     }
                 }
                 cursor.moveToNext();
