@@ -1,9 +1,9 @@
 package com.android.ted.inputer.util;
 
-import android.text.TextUtils;
-
+import com.android.ted.inputer.db.LoaderSdk;
 import com.android.ted.inputer.db.opt.KeyWordDataHelper;
-import com.android.ted.inputer.main.MainApplication;
+
+import java.util.ArrayList;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -26,7 +26,7 @@ public class KeyWordUtil {
 
     public KeyWordUtil init() {
         if (mKeyWordDataHelper == null) {
-            mKeyWordDataHelper = new KeyWordDataHelper(MainApplication.getIntance());
+            mKeyWordDataHelper = new KeyWordDataHelper(LoaderSdk.getInstance().getContext());
         }
         return this;
     }
@@ -36,13 +36,13 @@ public class KeyWordUtil {
         if (lastSubscription != null && lastSubscription.isUnsubscribed()) {
             lastSubscription.unsubscribe();
         }
-        Subscription subscription = Observable.defer(new Func0<Observable<String>>() {
+        Subscription subscription = Observable.defer(new Func0<Observable<ArrayList<String>>>() {
             @Override
-            public Observable<String> call() {
-                String word = mKeyWordDataHelper.queryWord(key);
-                return Observable.just(word);
+            public Observable<ArrayList<String>> call() {
+                ArrayList<String> words = mKeyWordDataHelper.queryWords(key);
+                return Observable.just(words);
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<String>() {
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<ArrayList<String>>() {
             @Override
             public void onCompleted() {
 
@@ -51,15 +51,17 @@ public class KeyWordUtil {
             @Override
             public void onError(Throwable throwable) {
                 if (callBack != null) {
-                    callBack.getKeyWordSuccess(false, "error");
+                    ArrayList<String> words = new ArrayList<String>();
+                    words.add("error");
+                    callBack.getKeyWordSuccess(false, words);
                 }
             }
 
             @Override
-            public void onNext(String s) {
+            public void onNext(ArrayList<String> resultWords) {
                 if (callBack != null) {
-                    boolean isSuccess = TextUtils.isEmpty(s) ? false : true;
-                    callBack.getKeyWordSuccess(isSuccess, s);
+                    boolean isSuccess = ( resultWords != null && resultWords.size() > 0 );
+                    callBack.getKeyWordSuccess(isSuccess, resultWords);// TODO: 15/12/23 undo
                 }
             }
         });

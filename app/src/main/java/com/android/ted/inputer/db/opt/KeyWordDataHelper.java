@@ -77,6 +77,20 @@ public class KeyWordDataHelper extends BaseDataHelper {
         return null;
     }
 
+    public ArrayList<String> queryWords(String key) {
+        ArrayList<KeyWordTb> queryList = query(key);
+        ArrayList<String> resultWords = new ArrayList<>();
+        if (queryList == null) {
+            return null;
+        }
+        for (KeyWordTb item : queryList) {
+            if (item.key != null && item.key.equals(key)) {
+                resultWords.add(item.word);
+            }
+        }
+        return resultWords;
+    }
+
     public int delete(String key) {
         return delete(KeyWordTable.KEY + " = ?", new String[]{key});
     }

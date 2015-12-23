@@ -7,7 +7,8 @@ import android.text.TextUtils;
 
 import com.android.ted.inputer.db.KeyWordTable;
 import com.android.ted.inputer.db.LoaderSdk;
-import com.android.ted.inputer.main.MainApplication;
+
+import java.util.ArrayList;
 
 /**
  * Description:
@@ -50,6 +51,7 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
 
     @Override
     public void onLoadComplete(Loader<Cursor> loader, Cursor cursor) {
+        ArrayList<String> words = new ArrayList<>();
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -60,13 +62,14 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
                 String key = cursor.getString(indexKey);
                 String word = cursor.getString(indexWord);
                 if (!TextUtils.isEmpty(curKey) && key.equals(curKey)) {
-                    if (mCallBack != null) {
-                        boolean isSuccess = !TextUtils.isEmpty(word);
-                        mCallBack.getKeyWordSuccess(isSuccess, word);
-                    }
+                    words.add(word);
                 }
                 cursor.moveToNext();
             }
+        }
+        if (mCallBack != null) {
+            boolean isSuccess = words.size() > 0;
+            mCallBack.getKeyWordSuccess(isSuccess, words);
         }
     }
     public void onDestroy() {

@@ -25,6 +25,8 @@ import com.android.ted.inputer.model.GlobalCache;
 import com.android.ted.inputer.util.KeyWordInterface;
 import com.android.ted.inputer.util.KeyWordUtil;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ted on 2015/12/2.
  * InputDataOperator
@@ -98,9 +100,9 @@ public class InputDataPresenter   {
             mKeyWordUtil.readTextKeyWordFromDb(text, new KeyWordInterface() {
 
                 @Override
-                public void getKeyWordSuccess(boolean isSuccess, String word) {
+                public void getKeyWordSuccess(boolean isSuccess, ArrayList<String> words) {
                     if (isSuccess){
-                        mFocusRecord = word;
+                        mFocusRecord = words.get(0);
                         mDataInterface.onMatchAll();
                         mFocusNodeInfo = editView;
                     }else {

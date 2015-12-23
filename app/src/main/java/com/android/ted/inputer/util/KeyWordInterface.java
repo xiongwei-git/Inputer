@@ -1,5 +1,7 @@
 package com.android.ted.inputer.util;
 
+import java.util.ArrayList;
+
 /**
  * Description:
  * Creator: ZhangJinWei
@@ -7,5 +9,5 @@ package com.android.ted.inputer.util;
  */
 public interface KeyWordInterface {
 
-    void getKeyWordSuccess(boolean isSuccess, String word);
+    void getKeyWordSuccess(boolean isSuccess, ArrayList<String> words);
 }
