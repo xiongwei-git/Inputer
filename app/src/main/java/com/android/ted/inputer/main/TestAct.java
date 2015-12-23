@@ -72,8 +72,6 @@ public class TestAct extends Activity implements View.OnClickListener, LoaderMan
                 KeyWordTable.KEY + " , " +
                 KeyWordTable.WORD + " from " + KeyWordTable
                 .TABLE_NAME;
-//        getLoaderManager().initLoader(0, null,
-//                this);
         new LoaderManager.LoaderCallbacks<Cursor>() {
 
             @Override
