@@ -56,7 +56,7 @@ public class KeyWordUtil {
             }
 
             @Override
-            public void onNext(String s) {
+            public void onNext           (String s) {
                 if (callBack != null) {
                     boolean isSuccess = TextUtils.isEmpty(s) ? false : true;
                     callBack.getKeyWordSuccess(isSuccess, s);
