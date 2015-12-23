@@ -26,14 +26,15 @@ public class ArgotUtil {
 
     /***
      * 转换含有暗语的字符串为明文
-     * @param srcStr 含有暗语的文字
-     * @param selection 光标位置
+     *
+     * @param srcStr      含有暗语的文字
+     * @param selection   光标位置
      * @param argotRecord 暗语对象
      * @return 明文
      */
-    public String getPlanTxt(String srcStr,int selection,ArgotRecord argotRecord){
-        String[] result = SplitText(srcStr,selection,argotRecord);
-        return result[0] + argotRecord.getPlanWord() + result[2];
+    public String getPlanTxt(String srcStr, int selection, ArgotRecord argotRecord) {
+        String[] result = SplitText(srcStr, selection, argotRecord);
+        return result[0] + argotRecord.getPhrase() + result[2];
     }
 
     /***
@@ -47,7 +48,7 @@ public class ArgotUtil {
     public static String[] SplitText(String resText, int selection, ArgotRecord argotRecord) {
         String[] result = new String[3];
         if (null != argotRecord && selection > 0) {
-            String argotWord = argotRecord.getArgotWord();
+            String argotWord = argotRecord.getShortcut();
             String selectStr = "";
             int selectNum = 0;
             for (int i = 1; i < selection + 1; i++) {
