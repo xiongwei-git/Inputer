@@ -54,6 +54,39 @@ public class KeyWordTableOpt {
         return results;
     }
 
+    public static ArrayList<KeyWordTb> fuzzySearch(String key) {
+        ArrayList<KeyWordTb> results = new ArrayList<>();
+        KeyWordTb item = null;
+        SQLiteDatabase db = DBManager.getInstance().getDbHelper().getReadableDatabase();
+        Cursor cursor = db.query(KeyWordTable.TABLE_NAME, null, KeyWordTable.KEY + " LIKE '" +
+                key + "%'", null, null, null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                item = new KeyWordTb();
+                item.key = key;
+                int indexWord = cursor.getColumnIndex(KeyWordTable
+                        .WORD);
+                item.word = cursor.getString(indexWord);
+
+                int indexId = cursor.getColumnIndex(KeyWordTable
+                        ._ID);
+                item._ID = cursor.getInt(indexId);
+                results.add(item);
+                cursor.moveToNext();
+            }
+        }
+        try {
+            if (cursor != null) {
+                cursor.close();
+            }
+        } catch (Exception e) {
+
+        }
+        return results;
+    }
+
+
     /**
      * @param keyWordTb
      * @return 0 means insert success.-1 means if this key has saved in this table ,-2 means insert

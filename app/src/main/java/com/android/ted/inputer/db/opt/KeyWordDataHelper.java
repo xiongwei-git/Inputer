@@ -77,19 +77,26 @@ public class KeyWordDataHelper extends BaseDataHelper {
         return null;
     }
 
-    public ArrayList<String> queryWords(String key) {
-        ArrayList<KeyWordTb> queryList = query(key);
+    /**
+     * 模糊搜索，匹配以key开头
+     * @param key
+     * @return
+     */
+    public ArrayList<String> fuzzySearchWords(String key) {
+        ArrayList<KeyWordTb> queryList = KeyWordTableOpt.fuzzySearch(key);
         ArrayList<String> resultWords = new ArrayList<>();
         if (queryList == null) {
             return null;
         }
         for (KeyWordTb item : queryList) {
             if (item.key != null && item.key.equals(key)) {
+                Log.e("ABC", "key = " + item.key + "\n" + "word = " + item.word);
                 resultWords.add(item.word);
             }
         }
         return resultWords;
     }
+
 
     public int delete(String key) {
         return delete(KeyWordTable.KEY + " = ?", new String[]{key});

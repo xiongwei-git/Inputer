@@ -3,7 +3,7 @@ package com.android.ted.inputer.util;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.ted.inputer.db.KeyWordTable;
 import com.android.ted.inputer.db.LoaderSdk;
@@ -43,8 +43,8 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
         mCursorLoader.reset();
         mCursorLoader.setUri(DataProvider.KEYWORDS_CONTENT_URI);
         mCursorLoader.setSortOrder(KeyWordTable._ID + " DESC");
-        mCursorLoader.setSelection(KeyWordTable.KEY + " =?");
-        mCursorLoader.setSelectionArgs(new String[]{key});
+        mCursorLoader.setSelection(KeyWordTable.KEY + " LIKE ?" );
+        mCursorLoader.setSelectionArgs(new String[]{ "" + key + "%"});
         mCursorLoader.startLoading();
         return this;
     }
@@ -52,6 +52,7 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
     @Override
     public void onLoadComplete(Loader<Cursor> loader, Cursor cursor) {
         ArrayList<String> words = new ArrayList<>();
+        Log.e("ABC", "curKey = " + curKey + "\n" + "cursor.getcount ==" + cursor.getCount());
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -59,11 +60,9 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
                         .WORD);
                 int indexKey = cursor.getColumnIndex(KeyWordTable
                         .KEY);
-                String key = cursor.getString(indexKey);
                 String word = cursor.getString(indexWord);
-                if (!TextUtils.isEmpty(curKey) && key.equals(curKey)) {
+                    Log.e("ABC", "curKey = " + curKey + "\n" + "word = " + word );
                     words.add(word);
-                }
                 cursor.moveToNext();
             }
         }
