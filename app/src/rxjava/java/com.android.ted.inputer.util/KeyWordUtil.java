@@ -39,7 +39,7 @@ public class KeyWordUtil {
         Subscription subscription = Observable.defer(new Func0<Observable<ArrayList<String>>>() {
             @Override
             public Observable<ArrayList<String>> call() {
-                ArrayList<String> words = mKeyWordDataHelper.queryWords(key);
+                ArrayList<String> words = mKeyWordDataHelper.fuzzySearchWords(key);
                 return Observable.just(words);
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<ArrayList<String>>() {
