@@ -16,6 +16,8 @@
 
 package com.android.ted.inputer.model;
 
+import com.android.ted.inputer.service.InputAccessibilityService;
+
 /**
  * Created by Ted on 2015/12/16.
  * Constants
@@ -24,5 +26,5 @@ public class Constants {
     public static int OVERLAY_PERMISSION_REQ_CODE = 0x0001;
     public static int ACCESSIBILITY_PERMISSION_REQ_CODE = 0x0002;
 
-    public static String ACCESSIBILITY_SERVICE_NAME = "/.service.InputAccessibilityService";
+    public static String ACCESSIBILITY_SERVICE_NAME = "/"+ InputAccessibilityService.class.getCanonicalName();
 }

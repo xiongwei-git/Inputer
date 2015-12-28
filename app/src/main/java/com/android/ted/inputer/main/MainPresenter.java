@@ -24,7 +24,9 @@ import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.ted.inputer.model.Constants;
+import com.android.ted.inputer.service.InputAccessibilityService;
 import com.android.ted.inputer.util.VersionUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -83,6 +85,7 @@ public class MainPresenter {
             if (info.getId().equals(mainActivity.getPackageName() + Constants.ACCESSIBILITY_SERVICE_NAME))
                 result = true;
         }
+        Logger.d(InputAccessibilityService.class.getCanonicalName());
         return result;
     }
 }
