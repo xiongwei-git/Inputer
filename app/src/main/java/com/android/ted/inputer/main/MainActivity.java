@@ -122,7 +122,7 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, TestAct.class));
+                startActivity(new Intent(MainActivity.this, PhraseRowViewActivity.class));
             }
         });
         fab.setOnLongClickListener(new View.OnLongClickListener() {
@@ -169,6 +169,7 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
     protected void onResume() {
         super.onResume();
         if (!mSharePreData.isCheckDrawOverlays() && !mMainPresenter.canDrawOverlays()) {
+            mSharePreData.setCheckDrawOverlays(true);
             return;
         }
         if (!mSharePreData.isCheckAccessibility() && !mMainPresenter.isSupportAccessibility()) {

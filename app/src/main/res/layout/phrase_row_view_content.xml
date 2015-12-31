@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".main.PhraseRowViewActivity"
+    tools:showIn="@layout/activity_phrase_row_view">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/shortcutContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="65.0dip">
+
+            <ImageView
+                android:id="@+id/shortcutIcon"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="20.0dip"
+                android:src="@drawable/ic_keyboard_grey600_24dp"/>
+
+            <EditText
+                android:id="@+id/shortcut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:layout_marginTop="18.0dip"
+                android:layout_toRightOf="@+id/shortcutIcon"
+                android:background="@android:color/white"
+                android:hint="@string/shortcut_field_hint"
+                android:inputType="textNoSuggestions"
+                android:paddingBottom="10.0dip"
+                android:singleLine="true"
+                android:textColor="@color/primaryDarkText"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="45.0dip"
+                android:layout_marginTop="5.0dip"
+                android:background="@color/divider_line_color"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/phraseContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shortcutContainer"
+            android:minHeight="65.0dip">
+
+            <ImageView
+                android:id="@+id/phraseIcon"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="20.0dip"
+                android:src="@drawable/ic_subject_grey600_24dp"/>
+
+            <com.android.ted.inputer.view.PhraseEditText
+                android:id="@+id/phrase"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:layout_marginTop="18.0dip"
+                android:layout_toRightOf="@+id/phraseIcon"
+                android:background="@android:color/white"
+                android:hint="@string/phrase_field_hint"
+                android:imeOptions="flagNoExtractUi"
+                android:paddingBottom="5.0dip"
+                android:singleLine="false"
+                android:textColor="@color/primaryDarkText"/>
+
+            <Button
+                android:id="@+id/addDynamicVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phrase"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3.0dip"
+                android:layout_marginLeft="69.0dip"
+                android:background="@android:color/transparent"
+                android:paddingLeft="0.0dip"
+                android:text="@string/show_dynamic_values"
+                android:textColor="@color/primaryDarkText"
+                android:textSize="14.0dip"/>
+
+            <TextView
+                android:id="@+id/anchorChooserTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addDynamicVal"
+                android:layout_marginBottom="10.0dip"
+                android:layout_marginLeft="45.0dip"
+                android:visibility="gone"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="45.0dip"
+                android:background="@color/divider_line_color"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/descriptionContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phraseContainer"
+            android:minHeight="65.0dip">
+
+            <ImageView
+                android:id="@+id/descriptionIcon"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="20.0dip"
+                android:src="@drawable/ic_info_outline_grey600_24dp"/>
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="5.0dip"
+                android:layout_marginTop="18.0dip"
+                android:layout_toRightOf="@+id/descriptionIcon"
+                android:background="@android:color/white"
+                android:hint="@string/description_field_hint"
+                android:paddingBottom="10.0dip"
+                android:singleLine="false"
+                android:textColor="@color/primaryDarkText"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="45.0dip"
+                android:background="@color/divider_line_color"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/expandImmediatelyContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="65.0dip"
+            android:layout_below="@+id/descriptionContainer">
+
+            <TextView
+                android:id="@+id/expandImmediatelyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="45.0dip"
+                android:text="@string/expands_immediately"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/primaryDarkText"/>
+
+            <Switch
+                android:id="@+id/expandImmediatelySwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10.0dip"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="45.0dip"
+                android:background="@color/divider_line_color"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/expandWithinWordContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="65.0dip"
+            android:layout_below="@+id/expandImmediatelyContainer">
+
+            <TextView
+                android:id="@+id/expandWithinWordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="45.0dip"
+                android:text="@string/expands_within_words"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/primaryDarkText"/>
+
+            <Switch
+                android:id="@+id/expandWithinWordSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10.0dip"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="45.0dip"
+                android:background="@color/divider_line_color"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

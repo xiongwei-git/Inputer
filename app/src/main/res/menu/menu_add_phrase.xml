@@ -14,5 +14,5 @@
         android:orderInCategory="200"
         app:showAsAction="always"
         android:title="@string/delete_phrase"
-        android:visible="false"/>
+        android:visible="true"/>
 </menu>
