@@ -5,7 +5,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.android.ted.inputer.db.KeyWordTable;
+import com.android.ted.inputer.db.opt.KeyWordTable;
 import com.android.ted.inputer.db.LoaderSdk;
 
 import java.util.ArrayList;

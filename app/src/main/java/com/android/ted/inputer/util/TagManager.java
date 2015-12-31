@@ -1,4 +1,4 @@
-package com.android.ted.inputer.db;
+package com.android.ted.inputer.util;
 
 import android.content.ClipboardManager;
 import android.content.Context;

@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.android.ted.inputer.db.DBManager;
-import com.android.ted.inputer.db.KeyWordTable;
-import com.android.ted.inputer.db.KeyWordTb;
 
 import java.util.ArrayList;
 

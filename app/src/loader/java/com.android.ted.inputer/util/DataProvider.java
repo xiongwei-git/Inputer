@@ -7,12 +7,13 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.android.ted.inputer.BuildConfig;
 import com.android.ted.inputer.db.DBManager;
 import com.android.ted.inputer.db.DbHelper;
-import com.android.ted.inputer.db.KeyWordTable;
+import com.android.ted.inputer.db.opt.KeyWordTable;
 
 /**
  * Description:
@@ -45,21 +46,21 @@ public class DataProvider extends ContentProvider {
         sUriMatcher.addURI(AUTHORITY, "keywords", KEYWORDS);
     }
 
-    public static DbHelper getDbHelper(){
+    public static DbHelper getDbHelper() {
         if (mDbHelper == null) {
             mDbHelper = DBManager.getInstance().getDbHelper();
         }
         return mDbHelper;
     }
 
-    private String matchTable(Uri uri){
+    private String matchTable(Uri uri) {
         //String table = null;
         int code = sUriMatcher.match(uri);
-        switch (code){
+        switch (code) {
             case KEYWORDS:
                 return KeyWordTable.TABLE_NAME;
             default:
-                throw new IllegalArgumentException("Unkown uri = " + uri);
+                throw new IllegalArgumentException("UnKnown uri = " + uri);
         }
     }
 
@@ -71,12 +72,12 @@ public class DataProvider extends ContentProvider {
 
     @Override
     public Cursor query(@Nullable Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        synchronized (DBlock){
+        synchronized (DBlock) {
             SQLiteDatabase db = getDbHelper().getReadableDatabase();
             String table = matchTable(uri);
             Cursor cursor = db.query(table, projection, selection, selectionArgs, null, null, sortOrder);
-
-            cursor.setNotificationUri(getContext().getContentResolver(), uri);
+            if (null != getContext())
+                cursor.setNotificationUri(getContext().getContentResolver(), uri);
             return cursor;
         }
 
@@ -85,26 +86,25 @@ public class DataProvider extends ContentProvider {
     @Override
     public String getType(@Nullable Uri uri) {
         int code = sUriMatcher.match(uri);
-        switch (code){
+        switch (code) {
             case KEYWORDS:
                 return KEYWORDS_CONTENT_TYPE;
             default:
-                throw new IllegalArgumentException("Unkown uri == " + uri);
+                throw new IllegalArgumentException("UnKnown uri == " + uri);
         }
 
     }
 
     @Override
-    public Uri insert(@Nullable Uri uri, ContentValues values) {
-        synchronized (DBlock){
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
+        synchronized (DBlock) {
             String table = matchTable(uri);
             SQLiteDatabase db = getDbHelper().getWritableDatabase();
-            long rowId = 0;
-             rowId = db.insert(table, null, values);
-            if (rowId > 0){
+            long rowId;
+            rowId = db.insert(table, null, values);
+            if (rowId > 0 && null != getContext()) {
                 getContext().getContentResolver().notifyChange(uri, null);
-                Uri returnUri = ContentUris.withAppendedId(uri, rowId);
-                return returnUri;
+                return ContentUris.withAppendedId(uri, rowId);
             }
 
         }
@@ -113,19 +113,20 @@ public class DataProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(@Nullable Uri uri, String selection, String[] selectionArgs) {
-        synchronized (DBlock){
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
+        synchronized (DBlock) {
             String table = matchTable(uri);
             SQLiteDatabase db = getDbHelper().getWritableDatabase();
             int count = db.delete(table, selection, selectionArgs);
-            getContext().getContentResolver().notifyChange(uri, null);
+            if (null != getContext())
+                getContext().getContentResolver().notifyChange(uri, null);
             return count;
         }
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        synchronized (DBlock){
+    public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        synchronized (DBlock) {
             String table = matchTable(uri);
             SQLiteDatabase db = getDbHelper().getWritableDatabase();
             return db.update(table, values, selection, selectionArgs);

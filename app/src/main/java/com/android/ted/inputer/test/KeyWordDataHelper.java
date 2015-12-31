@@ -1,4 +1,4 @@
-package com.android.ted.inputer.db.opt;
+package com.android.ted.inputer.test;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,8 +7,10 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.android.ted.inputer.db.KeyWordTable;
-import com.android.ted.inputer.db.KeyWordTb;
+import com.android.ted.inputer.db.opt.KeyWordTable;
+import com.android.ted.inputer.db.opt.KeyWordTb;
+import com.android.ted.inputer.db.opt.BaseDataHelper;
+import com.android.ted.inputer.db.opt.KeyWordTableOpt;
 import com.android.ted.inputer.util.DataProvider;
 
 import java.util.ArrayList;
@@ -44,7 +46,6 @@ public class KeyWordDataHelper extends BaseDataHelper {
                 item.key = key;
                 int indexWord = cursor.getColumnIndex(KeyWordTable
                         .WORD);
-                Log.e("db", "indexWord =  " + indexWord);
                 item.word = cursor.getString(indexWord);
 
                 int indexId = cursor.getColumnIndex(KeyWordTable._ID);

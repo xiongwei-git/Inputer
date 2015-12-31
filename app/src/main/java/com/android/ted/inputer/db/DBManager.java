@@ -9,9 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
  * Date:15/12/17 下午2:36
  */
 public class DBManager {
+
     private static DBManager mDBManager;
     private DbHelper mDbHelper;
     private Context mContext;
+
     private DBManager( ) {
         mContext = LoaderSdk.getInstance().getContext();
     }

@@ -1,4 +1,4 @@
-package com.android.ted.inputer.db;
+package com.android.ted.inputer.db.opt;
 
 import android.provider.BaseColumns;
 

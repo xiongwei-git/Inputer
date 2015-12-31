@@ -1,4 +1,4 @@
-package com.android.ted.inputer.main;
+package com.android.ted.inputer.test;
 
 import android.app.Activity;
 import android.app.LoaderManager;
@@ -17,10 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.ted.inputer.R;
-import com.android.ted.inputer.db.KeyWordTable;
-import com.android.ted.inputer.db.KeyWordTb;
+import com.android.ted.inputer.db.opt.KeyWordTable;
+import com.android.ted.inputer.db.opt.KeyWordTb;
 import com.android.ted.inputer.util.DataProvider;
-import com.android.ted.inputer.db.opt.KeyWordDataHelper;
 import com.android.ted.inputer.db.opt.KeyWordTableOpt;
 
 

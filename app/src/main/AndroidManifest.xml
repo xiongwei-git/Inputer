@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".main.TestAct"
+            android:name=".test.TestAct"
             android:screenOrientation="portrait"
             >
         </activity>
@@ -55,6 +55,7 @@
             android:authorities="${PROVIDER_AUTHORITIES}">
             <grant-uri-permission android:pathPattern=".*"/>
         </provider>
+
     </application>
 
 </manifest>

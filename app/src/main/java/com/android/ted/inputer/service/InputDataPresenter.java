@@ -23,7 +23,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.android.ted.inputer.model.GlobalCache;
 import com.android.ted.inputer.util.KeyWordInterface;
-import com.android.ted.inputer.util.KeyWordUtil;
 
 import java.util.ArrayList;
 
@@ -36,11 +35,11 @@ public class InputDataPresenter   {
 
     private AccessibilityNodeInfo mFocusNodeInfo;
     private String mFocusRecord = "xiongwei";
-    private KeyWordUtil mKeyWordUtil;
+    //private KeyWordUtil mKeyWordUtil;
 
     public InputDataPresenter(InputDataMediator dataInterface) {
         this.mDataInterface = dataInterface;
-        mKeyWordUtil = new KeyWordUtil();
+        //mKeyWordUtil = new KeyWordUtil();
     }
 
 
@@ -97,19 +96,19 @@ public class InputDataPresenter   {
             }
 
 
-            mKeyWordUtil.readTextKeyWordFromDb(text, new KeyWordInterface() {
-
-                @Override
-                public void getKeyWordSuccess(boolean isSuccess, ArrayList<String> words) {
-                    if (isSuccess){
-                        mFocusRecord = words.get(0);
-                        mDataInterface.onMatchAll();
-                        mFocusNodeInfo = editView;
-                    }else {
-                        mDataInterface.onMatchNothing();
-                    }
-                }
-            });
+//            mKeyWordUtil.readTextKeyWordFromDb(text, new KeyWordInterface() {
+//
+//                @Override
+//                public void getKeyWordSuccess(boolean isSuccess, ArrayList<String> words) {
+//                    if (isSuccess){
+//                        mFocusRecord = words.get(0);
+//                        mDataInterface.onMatchAll();
+//                        mFocusNodeInfo = editView;
+//                    }else {
+//                        mDataInterface.onMatchNothing();
+//                    }
+//                }
+//            });
         }
     }
 
@@ -154,8 +153,8 @@ public class InputDataPresenter   {
     }
 
     public void onDestroy() {
-        if (mKeyWordUtil != null) {
-            mKeyWordUtil.onDestroy();
-        }
+//        if (mKeyWordUtil != null) {
+//            mKeyWordUtil.onDestroy();
+//        }
     }
 }

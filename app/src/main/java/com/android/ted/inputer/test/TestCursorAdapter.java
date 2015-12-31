@@ -1,4 +1,4 @@
-package com.android.ted.inputer.main;
+package com.android.ted.inputer.test;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.ted.inputer.R;
-import com.android.ted.inputer.db.KeyWordTable;
+import com.android.ted.inputer.db.opt.KeyWordTable;
 
 
 /**
