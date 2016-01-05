@@ -1,4 +1,4 @@
-package com.android.ted.inputer.db.opt;
+package com.android.ted.inputer.db;
 
 import android.content.ContentValues;
 import android.content.Context;

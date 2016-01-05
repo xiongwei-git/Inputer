@@ -18,6 +18,12 @@
         android:orderInCategory="600"
         android:title="@string/restorePhrases"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/debug_enter"
+        android:orderInCategory="700"
+        android:title="@string/debug_enter"
+        app:showAsAction="never"/>
     <item
         android:id="@+id/sortType"
         android:icon="@drawable/ic_keyboard_arrow_down_white_24dp"

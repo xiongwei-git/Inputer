@@ -81,7 +81,6 @@ public class InputAccessibilityService extends AccessibilityService
 
     @Override
     public void onServiceConnected() {
-
         mContext = this;
         mDataOperator = new InputDataPresenter(this);
     }

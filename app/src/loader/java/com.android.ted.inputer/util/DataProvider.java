@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 import com.android.ted.inputer.BuildConfig;
 import com.android.ted.inputer.db.DBManager;
 import com.android.ted.inputer.db.DbHelper;
-import com.android.ted.inputer.db.opt.KeyWordTable;
+import com.android.ted.inputer.model.ArgotRecord;
 
 /**
  * Description:
@@ -58,7 +58,7 @@ public class DataProvider extends ContentProvider {
         int code = sUriMatcher.match(uri);
         switch (code) {
             case KEYWORDS:
-                return KeyWordTable.TABLE_NAME;
+                return ArgotRecord.TABLE_NAME;
             default:
                 throw new IllegalArgumentException("UnKnown uri = " + uri);
         }

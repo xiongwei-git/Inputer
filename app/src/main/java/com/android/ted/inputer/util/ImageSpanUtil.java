@@ -20,6 +20,7 @@ import com.android.ted.inputer.model.Tag;
  */
 public class ImageSpanUtil {
 
+    @SuppressWarnings("deprecation")
     public static BitmapDrawable getTagView(Context context, Tag tag) {
         RelativeLayout relativeLayout = (RelativeLayout) View.inflate(context, R.layout.spanned_anchor_layout, null);
         TextView textView = (TextView) relativeLayout.findViewById(R.id.anchorNameTextView);

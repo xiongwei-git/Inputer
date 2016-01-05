@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.android.ted.inputer.R;
 import com.android.ted.inputer.base.BaseActivity;
 import com.android.ted.inputer.db.SharePreData;
+import com.android.ted.inputer.debug.DebugDbActivity;
 import com.android.ted.inputer.model.Constants;
 import com.cocosw.favor.FavorAdapter;
 
@@ -156,7 +157,10 @@ public class MainActivity extends BaseActivity implements MainMediator, View.OnC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        if(item.getItemId() == R.id.debug_enter){
+            startActivity(new Intent(MainActivity.this, DebugDbActivity.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

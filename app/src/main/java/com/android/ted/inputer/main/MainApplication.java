@@ -18,7 +18,7 @@ package com.android.ted.inputer.main;
 
 import android.app.Application;
 
-import com.android.ted.inputer.db.LoaderSdk;
+import com.android.ted.inputer.util.LoaderSdk;
 import com.orhanobut.logger.Logger;
 
 /**

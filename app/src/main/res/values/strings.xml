@@ -1,5 +1,5 @@
 <resources>
-    <!--<string name="app_name">Inputer</string>-->
+    <string name="app_name">Inputer</string>
     <string name="cancel">取消</string>
     <string name="ok">确定</string>
     <string name="system_alert_permission_rationale_dialog_text">为了您的正常使用 <b>\“在其他应用上层显示\”</b> 权限需要打开，否则您将无法体验到所有功能。您也可在<b>\“更多\”-\“设置\”</b>中重新打开或者关闭。</string>
@@ -53,6 +53,7 @@
     <string name="day_name_full_anchor">Day (full name)</string>
     <string name="day_name_short_anchor">Day (short name)</string>
     <string name="day_numeric_anchor">Day (numeric)</string>
+    <string name="debug_enter">Debug Entrance</string>
     <string name="delete_phrase">Delete phrase</string>
     <string name="delete_phrase_dialog_message">Delete phrase?</string>
     <string name="description_field_hint">Description (Optional)</string>

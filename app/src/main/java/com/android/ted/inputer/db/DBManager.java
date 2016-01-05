@@ -3,6 +3,8 @@ package com.android.ted.inputer.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.ted.inputer.util.LoaderSdk;
+
 /**
  * Description:
  * Creator: ZhangJinWei

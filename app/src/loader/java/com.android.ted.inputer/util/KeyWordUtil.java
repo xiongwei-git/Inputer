@@ -5,8 +5,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.android.ted.inputer.db.opt.KeyWordTable;
-import com.android.ted.inputer.db.LoaderSdk;
+import com.android.ted.inputer.model.ArgotRecord;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
         mCursorLoader = new CursorLoader(LoaderSdk.getInstance().getContext());
         mCursorLoader.registerListener(0, this);
         mCursorLoader.setUri(DataProvider.KEYWORDS_CONTENT_URI);
-        mCursorLoader.setSortOrder(KeyWordTable._ID + " DESC");
+        mCursorLoader.setSortOrder(ArgotRecord._ID + " DESC");
         mCursorLoader.startLoading();
         return this;
     }
@@ -42,8 +41,8 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
         mCursorLoader.stopLoading();
         mCursorLoader.reset();
         mCursorLoader.setUri(DataProvider.KEYWORDS_CONTENT_URI);
-        mCursorLoader.setSortOrder(KeyWordTable._ID + " DESC");
-        mCursorLoader.setSelection(KeyWordTable.KEY + " LIKE ?" );
+        mCursorLoader.setSortOrder(ArgotRecord._ID + " DESC");
+        mCursorLoader.setSelection(ArgotRecord.KEY + " LIKE ?" );
         mCursorLoader.setSelectionArgs(new String[]{ "" + key + "%"});
         mCursorLoader.startLoading();
         return this;
@@ -56,9 +55,9 @@ public class KeyWordUtil implements Loader.OnLoadCompleteListener<Cursor>{
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                int indexWord = cursor.getColumnIndex(KeyWordTable
+                int indexWord = cursor.getColumnIndex(ArgotRecord
                         .WORD);
-                int indexKey = cursor.getColumnIndex(KeyWordTable
+                int indexKey = cursor.getColumnIndex(ArgotRecord
                         .KEY);
                 String word = cursor.getString(indexWord);
                     Log.e("ABC", "curKey = " + curKey + "\n" + "word = " + word );

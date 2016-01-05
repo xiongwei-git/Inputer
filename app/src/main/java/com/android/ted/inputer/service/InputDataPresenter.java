@@ -22,9 +22,6 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.android.ted.inputer.model.GlobalCache;
-import com.android.ted.inputer.util.KeyWordInterface;
-
-import java.util.ArrayList;
 
 /**
  * Created by Ted on 2015/12/2.

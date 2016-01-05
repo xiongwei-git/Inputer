@@ -20,11 +20,11 @@ import android.widget.TextView;
 
 import com.android.ted.inputer.R;
 import com.android.ted.inputer.base.BaseActivity;
-import com.android.ted.inputer.util.TagManager;
 import com.android.ted.inputer.model.ArgotRecord;
 import com.android.ted.inputer.model.Tag;
 import com.android.ted.inputer.util.CommonUtil;
 import com.android.ted.inputer.util.ImageSpanUtil;
+import com.android.ted.inputer.util.TagManager;
 import com.android.ted.inputer.view.PhraseEditText;
 import com.android.ted.inputer.view.TClickableSpan;
 

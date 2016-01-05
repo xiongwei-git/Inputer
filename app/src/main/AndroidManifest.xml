@@ -24,17 +24,16 @@
         </activity>
 
         <activity
-            android:name=".test.TestAct"
+            android:name=".main.PhraseRowViewActivity"
             android:screenOrientation="portrait"
-            >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            />
 
         <activity
-            android:name=".main.PhraseRowViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".debug.DebugDbActivity"
             android:screenOrientation="portrait"
-            >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            />
 
         <service
             android:name=".service.InputAccessibilityService"
@@ -50,11 +49,11 @@
                 android:resource="@xml/accessibility_service_config"/>
         </service>
 
-        <provider
-            android:name=".util.DataProvider"
-            android:authorities="${PROVIDER_AUTHORITIES}">
-            <grant-uri-permission android:pathPattern=".*"/>
-        </provider>
+        <!--<provider-->
+        <!--android:name=".util.DataProvider"-->
+        <!--android:authorities="${PROVIDER_AUTHORITIES}">-->
+        <!--<grant-uri-permission android:pathPattern=".*"/>-->
+        <!--</provider>-->
 
     </application>
 
