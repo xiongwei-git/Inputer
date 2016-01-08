@@ -69,7 +69,9 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.cocosw:favor:0.2.0@aar'
     compile 'com.getbase:floatingactionbutton:1.10.1'
-    compile 'com.github.orhanobut:logger:1.12'
+    compile 'com.github.xiongwei-git:Logger:1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
 
 //    rxjavaCompile 'io.reactivex:rxandroid:1.1.0'
 //    rxjavaCompile 'io.reactivex:rxjava:1.1.0'

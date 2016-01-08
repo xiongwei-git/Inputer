@@ -18,6 +18,7 @@ package com.android.ted.inputer.main;
 
 import android.app.Application;
 
+import com.android.ted.inputer.BuildConfig;
 import com.android.ted.inputer.util.LoaderSdk;
 import com.orhanobut.logger.Logger;
 
@@ -26,10 +27,9 @@ import com.orhanobut.logger.Logger;
  * MainApplication
  */
 public class MainApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Logger.init("xiongwei").methodCount(1);
-        LoaderSdk.getInstance().init(this);
-    }
+  @Override public void onCreate() {
+    super.onCreate();
+    Logger.init("xiongwei").setLogValve(BuildConfig.LOG_DEBUG).methodCount(1);
+    LoaderSdk.getInstance().init(this);
+  }
 }
