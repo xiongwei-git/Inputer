@@ -85,7 +85,7 @@ public class MainPresenter {
             if (info.getId().equals(mainActivity.getPackageName() + Constants.ACCESSIBILITY_SERVICE_NAME))
                 result = true;
         }
-        Logger.d(InputAccessibilityService.class.getCanonicalName());
+        //Logger.d(InputAccessibilityService.class.getCanonicalName());
         return result;
     }
 }

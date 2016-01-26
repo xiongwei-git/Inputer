@@ -1,4 +1,4 @@
-package com.android.ted.inputer.db;
+package com.android.ted.inputer.db.sql;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,7 +13,7 @@ import com.android.ted.inputer.util.LoaderSdk;
 public class DBManager {
 
     private static DBManager mDBManager;
-    private DbHelper mDbHelper;
+    private BaseDbHelper mBaseDbHelper;
     private Context mContext;
 
     private DBManager( ) {
@@ -27,11 +27,11 @@ public class DBManager {
         return mDBManager;
     }
 
-    public DbHelper getDbHelper() {
-        if (mDbHelper == null) {
-            mDbHelper = new DbHelper(mContext);
+    public BaseDbHelper getDbHelper() {
+        if (mBaseDbHelper == null) {
+            mBaseDbHelper = new BaseDbHelper(mContext);
         }
-        return mDbHelper;
+        return mBaseDbHelper;
     }
 
     public SQLiteDatabase getWritableDatabase(){

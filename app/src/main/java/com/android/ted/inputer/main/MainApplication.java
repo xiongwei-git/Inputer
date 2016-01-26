@@ -20,6 +20,7 @@ import android.app.Application;
 
 import com.android.ted.inputer.BuildConfig;
 import com.android.ted.inputer.util.LoaderSdk;
+import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -29,7 +30,14 @@ import com.orhanobut.logger.Logger;
 public class MainApplication extends Application {
   @Override public void onCreate() {
     super.onCreate();
-    Logger.init("xiongwei").setLogValve(BuildConfig.LOG_DEBUG).methodCount(1);
+    Stetho.initialize(
+        Stetho.newInitializerBuilder(this)
+            .enableDumpapp(
+                Stetho.defaultDumperPluginsProvider(this))
+            .enableWebKitInspector(
+                Stetho.defaultInspectorModulesProvider(this))
+            .build());
+    Logger.init("xiongwei").hideThreadInfo().setLogValve(BuildConfig.LOG_DEBUG).methodCount(1);
     LoaderSdk.getInstance().init(this);
   }
 }

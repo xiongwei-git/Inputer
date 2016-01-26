@@ -99,7 +99,7 @@ public class InputAccessibilityService extends AccessibilityService
 
     /**
      * Processes an AccessibilityEvent, by traversing the View's tree and
-     * putting together a message to speak to the user.
+     * putting together dataCallBack message to speak to the user.
      */
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
