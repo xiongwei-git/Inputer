@@ -7,7 +7,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import com.android.ted.inputer.R;
 import com.android.ted.inputer.base.BaseActivity;
-import com.android.ted.inputer.model.ArgotRecord;
+import com.android.ted.inputer.model.Argot;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -57,18 +57,18 @@ public class DebugDbActivity extends BaseActivity implements View.OnClickListene
   long timestamp = -1;
 
   private void onWrite() {
-    Observable.create(new Observable.OnSubscribe<ArgotRecord>() {
-      @Override public void call(Subscriber<? super ArgotRecord> subscriber) {
+    Observable.create(new Observable.OnSubscribe<Argot>() {
+      @Override public void call(Subscriber<? super Argot> subscriber) {
         //for (int i = 0; i < 1000; i++) {
-          ArgotRecord argotRecord = new ArgotRecord();
-          argotRecord.setShortcut(String.valueOf(6 + 1));
-          argotRecord.setPhrase("xiongwei == " + 6);
-          argotRecord.setTimestamp(System.currentTimeMillis());
-          argotRecord.setExpands_immediately(false);
-          argotRecord.setExpands_within_word(false);
-          if(manager.has(argotRecord.getShortcut())){
-            manager.update(argotRecord);
-          }else manager.insert(argotRecord);
+          Argot argot = new Argot();
+          argot.setShortcut(String.valueOf(6 + 1));
+          argot.setPhrase("xiongwei == " + 6);
+          argot.setTimestamp(System.currentTimeMillis());
+          argot.setExpands_immediately(false);
+          argot.setExpands_within_word(false);
+          if(manager.has(argot.getShortcut())){
+            manager.update(argot);
+          }else manager.insert(argot);
           //if (ArgotManager.insert(argotRecord) < 0) ArgotManager.update(argotRecord);
         //}
         subscriber.onCompleted();
@@ -76,7 +76,7 @@ public class DebugDbActivity extends BaseActivity implements View.OnClickListene
     })
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.newThread())
-        .subscribe(new Subscriber<ArgotRecord>() {
+        .subscribe(new Subscriber<Argot>() {
           @Override public void onStart() {
             super.onStart();
             timestamp = System.currentTimeMillis();
@@ -89,22 +89,22 @@ public class DebugDbActivity extends BaseActivity implements View.OnClickListene
           @Override public void onError(Throwable e) {
           }
 
-          @Override public void onNext(ArgotRecord argotRecord) {
+          @Override public void onNext(Argot argot) {
           }
         });
   }
 
   private void onRead() {
-    Observable.create(new Observable.OnSubscribe<ArgotRecord>() {
-      @Override public void call(Subscriber<? super ArgotRecord> subscriber) {
+    Observable.create(new Observable.OnSubscribe<Argot>() {
+      @Override public void call(Subscriber<? super Argot> subscriber) {
         //ArgotRecord argotRecord = ArgotManager.fuzzyQuery("78").get(0);
-        ArgotRecord argotRecord = manager.query("shortcut","78").get(0);
-        subscriber.onNext(argotRecord);
+        Argot argot = manager.query("shortcut","78").get(0);
+        subscriber.onNext(argot);
       }
     })
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.newThread())
-        .subscribe(new Subscriber<ArgotRecord>() {
+        .subscribe(new Subscriber<Argot>() {
           @Override public void onStart() {
             super.onStart();
             timestamp = System.currentTimeMillis();
@@ -116,9 +116,9 @@ public class DebugDbActivity extends BaseActivity implements View.OnClickListene
           @Override public void onError(Throwable e) {
           }
 
-          @Override public void onNext(ArgotRecord argotRecord) {
+          @Override public void onNext(Argot argot) {
             mTextView.append(
-                "读取一条数据耗时" + (System.currentTimeMillis() - timestamp) + "毫秒" + "\n结果是" + argotRecord
+                "读取一条数据耗时" + (System.currentTimeMillis() - timestamp) + "毫秒" + "\n结果是" + argot
                     .getPhrase() + "\n");
           }
         });

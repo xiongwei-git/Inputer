@@ -16,7 +16,7 @@
 
 package com.android.ted.inputer.util;
 
-import com.android.ted.inputer.model.ArgotRecord;
+import com.android.ted.inputer.model.Argot;
 
 /**
  * Created by Ted on 2015/12/15.
@@ -29,12 +29,12 @@ public class ArgotUtil {
      *
      * @param srcStr      含有暗语的文字
      * @param selection   光标位置
-     * @param argotRecord 暗语对象
+     * @param argot 暗语对象
      * @return 明文
      */
-    public String getPlanTxt(String srcStr, int selection, ArgotRecord argotRecord) {
-        String[] result = SplitText(srcStr, selection, argotRecord);
-        return result[0] + argotRecord.getPhrase() + result[2];
+    public String getPlanTxt(String srcStr, int selection, Argot argot) {
+        String[] result = SplitText(srcStr, selection, argot);
+        return result[0] + argot.getPhrase() + result[2];
     }
 
     /***
@@ -42,13 +42,13 @@ public class ArgotUtil {
      *
      * @param resText     目标字符串
      * @param selection   selection
-     * @param argotRecord argotRecord
+     * @param argot argotRecord
      * @return 数组
      */
-    public static String[] SplitText(String resText, int selection, ArgotRecord argotRecord) {
+    public static String[] SplitText(String resText, int selection, Argot argot) {
         String[] result = new String[3];
-        if (null != argotRecord && selection > 0) {
-            String argotWord = argotRecord.getShortcut();
+        if (null != argot && selection > 0) {
+            String argotWord = argot.getShortcut();
             String selectStr = "";
             int selectNum = 0;
             for (int i = 1; i < selection + 1; i++) {

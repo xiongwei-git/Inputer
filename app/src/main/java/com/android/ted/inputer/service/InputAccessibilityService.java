@@ -34,7 +34,7 @@ public class InputAccessibilityService extends AccessibilityService
     private final int MSG_HIDE_BTN = 0x001;
 
     private Context mContext;
-    private InputDataPresenter mDataOperator;
+    private InputDataPresenter mPresenter;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -48,7 +48,7 @@ public class InputAccessibilityService extends AccessibilityService
 
     @Override
     public void onClickBtn(FloatWindowView.FloatBtnType type) {
-        mDataOperator.onExpand();
+        mPresenter.onExpand();
         mHandler.removeMessages(MSG_HIDE_BTN);
         TWindowManager.hideFloatBtn();
     }
@@ -82,7 +82,7 @@ public class InputAccessibilityService extends AccessibilityService
     @Override
     public void onServiceConnected() {
         mContext = this;
-        mDataOperator = new InputDataPresenter(this);
+        mPresenter = new InputDataPresenter(this);
     }
 
     @Override
@@ -91,8 +91,8 @@ public class InputAccessibilityService extends AccessibilityService
 
     @Override
     public void onDestroy() {
-        mDataOperator.onDestroy();
-        mDataOperator = null;
+        mPresenter.onDestroy();
+        mPresenter = null;
         mContext = null;
         super.onDestroy();
     }
@@ -103,7 +103,7 @@ public class InputAccessibilityService extends AccessibilityService
      */
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        mDataOperator.onHandleAccessibilityEvent(event);
+        mPresenter.onHandleAccessibilityEvent(event);
     }
 
 

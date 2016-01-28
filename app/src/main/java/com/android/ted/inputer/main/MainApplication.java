@@ -19,7 +19,7 @@ package com.android.ted.inputer.main;
 import android.app.Application;
 
 import com.android.ted.inputer.BuildConfig;
-import com.android.ted.inputer.util.LoaderSdk;
+import com.android.ted.inputer.util.AppContext;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.Logger;
 
@@ -38,6 +38,6 @@ public class MainApplication extends Application {
                 Stetho.defaultInspectorModulesProvider(this))
             .build());
     Logger.init("xiongwei").hideThreadInfo().setLogValve(BuildConfig.LOG_DEBUG).methodCount(1);
-    LoaderSdk.getInstance().init(this);
+    AppContext.getIns().init(this);
   }
 }

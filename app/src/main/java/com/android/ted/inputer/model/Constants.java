@@ -21,6 +21,13 @@ package com.android.ted.inputer.model;
  * Constants
  */
 public class Constants {
+    public static final int ARGOT_SAVE_RESULT_OK = 0;//保存成功
+    public static final int ARGOT_SAVE_RESULT_ALL_NULL = -1;//全部数据为空
+    public static final int ARGOT_SAVE_RESULT_SHORTCUT_NULL = -2;//暗语文本为空
+    public static final int ARGOT_SAVE_RESULT_PHRASE_NULL = -3;//明语文本为空
+    public static final int ARGOT_SAVE_RESULT_ILLEGAL_CHA = -4;//不合法字符
+    public static final int ARGOT_SAVE_RESULT_LINE_FEED = -5;//换行
+
     public static int OVERLAY_PERMISSION_REQ_CODE = 0x0001;
     public static int ACCESSIBILITY_PERMISSION_REQ_CODE = 0x0002;
 

@@ -23,12 +23,19 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.ted.inputer.model.Argot;
 import com.android.ted.inputer.model.Constants;
 import com.android.ted.inputer.service.InputAccessibilityService;
 import com.android.ted.inputer.util.VersionUtil;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Ted on 2015/12/17.
@@ -88,4 +95,6 @@ public class MainPresenter {
         //Logger.d(InputAccessibilityService.class.getCanonicalName());
         return result;
     }
+
+
 }

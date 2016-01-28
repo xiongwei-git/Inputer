@@ -37,8 +37,8 @@
     <string name="accessibility_query_window_label">Inputer</string>
     <string name="accessibility_query_window_description">Task App Accessibility Service</string>
 
-    <string name="accesses_data_permission_description">This app has permission to access phrases that you define in the Texpand app</string>
-    <string name="accesses_data_permission_title">Accesses data in Texpand</string>
+    <string name="accesses_data_permission_description">This app has permission to access phrases that you define in the Inputer app</string>
+    <string name="accesses_data_permission_title">Accesses data in Inputer</string>
     <string name="add_exclusion">Add</string>
     <string name="adjust_transparency_dialog_title">Opacity level</string>
     <string name="am_pm_anchor">AM/PM</string>
@@ -98,7 +98,7 @@
     <string name="on">ON</string>
 
     <string name="open_source_dialog_title">Open Source Libraries</string>
-    <string name="permission_group_title">Texpand</string>
+    <string name="permission_group_title">Inputer</string>
     <string name="phrase_contains_shortcut_error_message">Phrase contains shortcut</string>
     <string name="phrase_field_hint">Phrase</string>
     <string name="phrase_saved_message">Saved</string>

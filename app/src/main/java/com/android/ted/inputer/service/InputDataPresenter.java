@@ -16,12 +16,19 @@
 
 package com.android.ted.inputer.service;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import com.android.ted.inputer.db.cp.ArgotManager;
+import com.android.ted.inputer.model.Argot;
 import com.android.ted.inputer.model.GlobalCache;
+import com.android.ted.inputer.util.AppContext;
+import com.orhanobut.logger.Logger;
+import java.util.ArrayList;
 
 /**
  * Created by Ted on 2015/12/2.
@@ -31,12 +38,12 @@ public class InputDataPresenter   {
     private InputDataMediator mDataInterface;
 
     private AccessibilityNodeInfo mFocusNodeInfo;
-    private String mFocusRecord = "xiongwei";
-    //private KeyWordUtil mKeyWordUtil;
+    private Argot mSelectArgot;
+    private ArgotManager mManager;
 
-    public InputDataPresenter(InputDataMediator dataInterface) {
-        this.mDataInterface = dataInterface;
-        //mKeyWordUtil = new KeyWordUtil();
+    public InputDataPresenter(InputDataMediator mediator) {
+        this.mDataInterface = mediator;
+        mManager = new ArgotManager((Context)mediator);
     }
 
 
@@ -61,15 +68,15 @@ public class InputDataPresenter   {
 
     public void onExpand() {
         if (mFocusNodeInfo == null) return;
-        if (TextUtils.isEmpty(mFocusRecord)) return;
+        if (TextUtils.isEmpty(mSelectArgot.getPhrase())) return;
         Bundle arguments = new Bundle();
-        arguments.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, mFocusRecord);
+        arguments.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, mSelectArgot.getPhrase());
         mFocusNodeInfo.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_TEXT.getId(), arguments);
     }
 
     public void onRepeal() {
         if (mFocusNodeInfo == null) return;
-        if (TextUtils.isEmpty(mFocusRecord)) return;
+        if (TextUtils.isEmpty(mSelectArgot.getPhrase())) return;
     }
 
 
@@ -82,30 +89,9 @@ public class InputDataPresenter   {
         final AccessibilityNodeInfo editView = getEditTextNodeInfo(source);
         if (null != editView && null != editView.getText()) {
             String text = editView.getText().toString();
-            if (text.equals("12")) {
-                mFocusNodeInfo = editView;
-                mFocusRecord = "xiongwei";
-                mDataInterface.onMatchPart();
-            } else if (text.equalsIgnoreCase("123")) {
-                mFocusNodeInfo = editView;
-                mFocusRecord = "xiongwei";
-                mDataInterface.onMatchAll();
-            }
-
-
-//            mKeyWordUtil.readTextKeyWordFromDb(text, new KeyWordInterface() {
-//
-//                @Override
-//                public void getKeyWordSuccess(boolean isSuccess, ArrayList<String> words) {
-//                    if (isSuccess){
-//                        mFocusRecord = words.get(0);
-//                        mDataInterface.onMatchAll();
-//                        mFocusNodeInfo = editView;
-//                    }else {
-//                        mDataInterface.onMatchNothing();
-//                    }
-//                }
-//            });
+            if(TextUtils.isEmpty(text))return;
+            ArrayList<Argot> list = mManager.query("shortcut",text);
+            Logger.d("size = "+list.size());
         }
     }
 
@@ -150,8 +136,6 @@ public class InputDataPresenter   {
     }
 
     public void onDestroy() {
-//        if (mKeyWordUtil != null) {
-//            mKeyWordUtil.onDestroy();
-//        }
+        mManager = null;
     }
 }

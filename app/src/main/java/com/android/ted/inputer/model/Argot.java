@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Ted on 2015/12/14.
  * ArgotRecord 暗语对象，用作数据存储
  */
-public final class ArgotRecord implements Serializable {
+public final class Argot implements Serializable {
   private long _id;
   private String shortcut;
   private String phrase;

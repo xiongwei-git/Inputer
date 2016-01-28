@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/phrase_item_state_drawable"
+    android:elevation="2.0dip"
+    android:padding="15.0dip">
+
+  <TextView
+      android:id="@+id/shortcutText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:ellipsize="end"
+      android:singleLine="true"
+      android:textAppearance="?android:textAppearanceMedium"
+      android:textColor="@color/primaryDarkText"
+      />
+
+  <TextView
+      android:id="@+id/argotText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/shortcutText"
+      android:layout_marginBottom="5.0dip"
+      android:ellipsize="end"
+      android:maxLines="4"
+      android:textAppearance="?android:textAppearanceListItemSmall"
+      android:textColor="@color/secondaryLightText"
+      />
+
+  <TextView
+      android:id="@+id/lastUsedTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/argotText"
+      android:singleLine="true"
+      android:textColor="@color/secondaryLightText"
+      />
+
+  <TextView
+      android:id="@+id/usageCountTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_below="@+id/argotText"
+      android:singleLine="true"
+      android:textColor="@color/secondaryLightText"
+      />
+</RelativeLayout>

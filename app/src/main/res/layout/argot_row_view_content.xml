@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".main.PhraseRowViewActivity"
-    tools:showIn="@layout/activity_phrase_row_view">
+    tools:context=".main.ArgotRowViewActivity"
+    tools:showIn="@layout/activity_argot_row_view">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="20.0dip"
                 android:src="@drawable/ic_subject_grey600_24dp"/>
 
-            <com.android.ted.inputer.view.PhraseEditText
+            <com.android.ted.inputer.view.ArgotEditText
                 android:id="@+id/phrase"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

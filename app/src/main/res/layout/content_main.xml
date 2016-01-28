@@ -5,53 +5,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_bg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".main.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    >
 
-    <RelativeLayout
-        android:id="@+id/switch_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="48.0dip"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/switch_bar_bg">
+  <RelativeLayout
+      android:id="@+id/switch_bar"
+      android:layout_width="fill_parent"
+      android:layout_height="48.0dip"
+      android:layout_alignParentTop="true"
+      android:background="@drawable/switch_bar_bg"
+      >
 
-        <TextView
-            android:id="@+id/status_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20.0dip"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20.0dip"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/white"
+        />
 
-        <ImageView
-            android:id="@+id/accessibility_service_disabled_warning"
-            android:layout_width="24.0dip"
-            android:layout_height="24.0dip"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10.0dip"
-            android:layout_toLeftOf="@+id/status_switch"
-            android:src="@drawable/ic_warning_amber_48dp"
-            android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/accessibility_service_disabled_warning"
+        android:layout_width="24.0dip"
+        android:layout_height="24.0dip"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10.0dip"
+        android:layout_toLeftOf="@+id/status_switch"
+        android:src="@drawable/ic_warning_amber_48dp"
+        android:visibility="gone"
+        />
 
-        <Switch
-            android:id="@+id/status_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10.0dip"
-            android:textOff="@string/off"
-            android:textOn="@string/on"/>
-    </RelativeLayout>
+    <Switch
+        android:id="@+id/status_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10.0dip"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        />
+  </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/switch_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+  <com.android.ted.inputer.view.AutoFitRecyclerView
+      android:id="@+id/recycleView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/switch_bar"
+      android:layout_marginBottom="5.0dip"
+      android:layout_marginLeft="4.0dip"
+      android:layout_marginRight="4.0dip"
+      android:layout_marginTop="3.0dip"
+      >
+  </com.android.ted.inputer.view.AutoFitRecyclerView>
 
 </RelativeLayout>

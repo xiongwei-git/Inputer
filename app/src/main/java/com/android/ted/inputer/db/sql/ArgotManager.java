@@ -5,10 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
-import android.text.TextUtils;
-import com.android.ted.inputer.db.cp.ArgotContentProvider;
-import com.android.ted.inputer.db.cp.ArgotDb;
-import com.android.ted.inputer.model.ArgotRecord;
+import com.android.ted.inputer.model.Argot;
 
 import java.util.ArrayList;
 
@@ -37,9 +34,9 @@ public class ArgotManager {
     //        }
   }
 
-  public ArrayList<ArgotRecord> query(String selection, String[] selectionArgs) {
+  public ArrayList<Argot> query(String selection, String[] selectionArgs) {
     SQLiteDatabase sqLiteDatabase = DBManager.getInstance().getReadableDatabase();
-    ArrayList<ArgotRecord> result = new ArrayList<>();
+    ArrayList<Argot> result = new ArrayList<>();
     Cursor cursor = null;
     try {
       cursor = sqLiteDatabase.query(TABLE_NAME, FIELD_NAME, selection, selectionArgs, "usage_count",
@@ -63,12 +60,12 @@ public class ArgotManager {
    * @param shortcut 简称
    * @return ArrayList
    */
-  public static ArrayList<ArgotRecord> exactQuery(String shortcut) {
+  public static ArrayList<Argot> exactQuery(String shortcut) {
     SQLiteDatabase sqLiteDatabase = DBManager.getInstance().getReadableDatabase();
     String sql = " select * from " + TABLE_NAME + " where " + FIELD_NAME[1] + " = ? ";
     String[] args = new String[] { shortcut };
     Cursor cursor = sqLiteDatabase.rawQuery(sql, args);
-    ArrayList<ArgotRecord> results = queryAll(cursor);
+    ArrayList<Argot> results = queryAll(cursor);
     try {
       if (cursor != null) {
         cursor.close();
@@ -79,11 +76,11 @@ public class ArgotManager {
     return results;
   }
 
-  public static ArrayList<ArgotRecord> fuzzyQuery(String shortcut) {
+  public static ArrayList<Argot> fuzzyQuery(String shortcut) {
     SQLiteDatabase sqLiteDatabase = DBManager.getInstance().getReadableDatabase();
     Cursor cursor = sqLiteDatabase.query(TABLE_NAME, null, FIELD_NAME[1] + " LIKE '" +
         shortcut + "%'", null, null, null, null);
-    ArrayList<ArgotRecord> results = queryAll(cursor);
+    ArrayList<Argot> results = queryAll(cursor);
     try {
       if (cursor != null) {
         cursor.close();
@@ -98,7 +95,7 @@ public class ArgotManager {
    * @return 0 means insert success.-1 means if this key has saved in this table ,-2 means insert
    * failed.
    */
-  public static int insert(@NonNull ArgotRecord argot) {
+  public static int insert(@NonNull Argot argot) {
     if (has(argot)) return -1;
     SQLiteDatabase db = DBManager.getInstance().getWritableDatabase();
     ContentValues value = getContentValues(argot);
@@ -109,8 +106,8 @@ public class ArgotManager {
     return 0;
   }
 
-  public static boolean has(ArgotRecord argot) {
-    ArrayList<ArgotRecord> list = exactQuery(argot.getShortcut());
+  public static boolean has(Argot argot) {
+    ArrayList<Argot> list = exactQuery(argot.getShortcut());
     return list != null && list.size() > 0;
   }
 
@@ -118,7 +115,7 @@ public class ArgotManager {
    * @param argot argot
    * @return >0 means success .and -1 means failed
    */
-  public static int update(@NonNull ArgotRecord argot) {
+  public static int update(@NonNull Argot argot) {
     SQLiteDatabase db = DBManager.getInstance().getWritableDatabase();
     ContentValues value = getContentValues(argot);
     return db.update(TABLE_NAME, value, null, null);
@@ -138,8 +135,8 @@ public class ArgotManager {
     db.execSQL(revertSql);
   }
 
-  public static ArrayList<ArgotRecord> queryAll(Cursor cursor) {
-    ArrayList<ArgotRecord> results = new ArrayList<>();
+  public static ArrayList<Argot> queryAll(Cursor cursor) {
+    ArrayList<Argot> results = new ArrayList<>();
     if (cursor == null) {
       return results;
     }
@@ -155,7 +152,7 @@ public class ArgotManager {
       int indexImmediately = cursor.getColumnIndexOrThrow("expands_immediately");
       int indexInWord = cursor.getColumnIndexOrThrow("expands_within_word");
       while (!cursor.isAfterLast()) {
-        ArgotRecord argot = new ArgotRecord();
+        Argot argot = new Argot();
         argot.set_id(cursor.getLong(indexId));
         argot.setShortcut(cursor.getString(indexShortcut));
         argot.setPhrase(cursor.getString(indexPhrase));
@@ -177,7 +174,7 @@ public class ArgotManager {
     return results;
   }
 
-  private static ContentValues getContentValues(@NonNull ArgotRecord argot) {
+  private static ContentValues getContentValues(@NonNull Argot argot) {
     ContentValues value = new ContentValues();
     value.put(FIELD_NAME[1], argot.getShortcut());
     value.put(FIELD_NAME[2], argot.getPhrase());

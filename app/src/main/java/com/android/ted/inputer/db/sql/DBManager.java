@@ -3,8 +3,6 @@ package com.android.ted.inputer.db.sql;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ted.inputer.util.LoaderSdk;
-
 /**
  * Description:
  * Creator: ZhangJinWei
@@ -17,7 +15,7 @@ public class DBManager {
     private Context mContext;
 
     private DBManager( ) {
-        mContext = LoaderSdk.getInstance().getContext();
+       // mContext = LoaderSdk.getIns().getContext();
     }
 
     public static DBManager getInstance() {

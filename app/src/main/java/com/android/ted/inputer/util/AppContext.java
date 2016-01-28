@@ -7,24 +7,25 @@ import android.content.Context;
  * Creator: ZhangJinWei
  * Date:15/12/17 下午2:52
  */
-public class LoaderSdk {
+public class AppContext {
     public Context mContext;
-    private static LoaderSdk sLoaderSdk;
+    private static AppContext sAppContext;
+
     public  void init(Context context){
         mContext = context;
     }
 
-    private LoaderSdk() {
+    private AppContext() {
     }
 
     public Context getContext() {
         return mContext;
     }
 
-    public static LoaderSdk getInstance() {
-        if (sLoaderSdk == null) {
-            sLoaderSdk = new LoaderSdk();
+    public static AppContext getIns() {
+        if (sAppContext == null) {
+            sAppContext = new AppContext();
         }
-        return sLoaderSdk;
+        return sAppContext;
     }
 }

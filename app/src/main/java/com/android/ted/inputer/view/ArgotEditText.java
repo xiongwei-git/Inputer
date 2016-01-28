@@ -14,20 +14,20 @@ import android.widget.EditText;
  *
  * @ com.android.ted.inputer.view
  */
-public class PhraseEditText extends EditText {
-    public PhraseEditText(Context context) {
+public class ArgotEditText extends EditText {
+    public ArgotEditText(Context context) {
         super(context);
     }
 
-    public PhraseEditText(Context context, AttributeSet attributeSet) {
+    public ArgotEditText(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }
 
-    public PhraseEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ArgotEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public PhraseEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ArgotEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -50,9 +50,9 @@ public class PhraseEditText extends EditText {
     }
 
     private class TInputConnectionWrapper extends InputConnectionWrapper {
-        private PhraseEditText mEditText;
+        private ArgotEditText mEditText;
 
-        public TInputConnectionWrapper(PhraseEditText phraseEditText, InputConnection inputConnection, boolean mutable) {
+        public TInputConnectionWrapper(ArgotEditText phraseEditText, InputConnection inputConnection, boolean mutable) {
             super(inputConnection, mutable);
             mEditText = phraseEditText;
         }
