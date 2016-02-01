@@ -22,8 +22,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.android.ted.inputer.model.Argot;
 import com.android.ted.inputer.window.FloatWindowView;
 import com.android.ted.inputer.window.TWindowManager;
+import java.util.ArrayList;
 
 /**
  * Created by Ted on 2015/12/2.
@@ -64,14 +66,14 @@ public class InputAccessibilityService extends AccessibilityService
     }
 
     @Override
-    public void onMatchPart() {
+    public void onMatchPart(ArrayList<Argot> list) {
         TWindowManager.showFloatBtnWindow(mContext,this, FloatWindowView.FloatBtnType.SUGGEST);
         mHandler.removeMessages(MSG_HIDE_BTN);
         mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000L);
     }
 
     @Override
-    public void onMatchAll() {
+    public void onMatchAll(Argot argot) {
         TWindowManager.showFloatBtnWindow(mContext,this, FloatWindowView.FloatBtnType.SELECT);
         mHandler.removeMessages(MSG_HIDE_BTN);
         mHandler.sendEmptyMessageDelayed(MSG_HIDE_BTN,5000L);

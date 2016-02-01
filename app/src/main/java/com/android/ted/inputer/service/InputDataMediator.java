@@ -16,12 +16,15 @@
 
 package com.android.ted.inputer.service;
 
+import com.android.ted.inputer.model.Argot;
+import java.util.ArrayList;
+
 /**
  * Created by Ted on 2015/12/2.
  */
 public interface InputDataMediator {
-    void onMatchPart();
-    void onMatchAll();
+    void onMatchPart(ArrayList<Argot> list);
+    void onMatchAll(Argot argot);
     void onTextChanged();
     void onMatchNothing();
 }
