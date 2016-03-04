@@ -53,7 +53,7 @@
         />
   </RelativeLayout>
 
-  <com.android.ted.inputer.view.AutoFitRecyclerView
+  <com.mrxiong.argot.view.AutoFitRecyclerView
       android:id="@+id/recycleView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -63,6 +63,6 @@
       android:layout_marginRight="4.0dip"
       android:layout_marginTop="3.0dip"
       >
-  </com.android.ted.inputer.view.AutoFitRecyclerView>
+  </com.mrxiong.argot.view.AutoFitRecyclerView>
 
 </RelativeLayout>

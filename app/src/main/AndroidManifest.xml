@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.ted.inputer">
+    package="com.mrxiong.argot">
 
   <permission-group
       android:label="@string/permission_group_title"
-      android:name="com.android.ted.inputer.permissions"/>
+      android:name="com.mrxiong.argot.permissions"/>
 
   <permission
       android:description="@string/accesses_data_permission_description"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/accesses_data_permission_title"
-      android:name="com.android.ted.inputer.permission.ACCESS_DATA"
-      android:permissionGroup="com.android.ted.inputer.permissions"/>
+      android:name="com.mrxiong.argot.permission.ACCESS_DATA"
+      android:permissionGroup="com.mrxiong.argot.permissions"/>
 
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <uses-permission android:name="android.permission.INTERNET"/>
 
   <application
-      android:allowBackup="true"
+      android:allowBackup="false"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
       android:name=".main.MainApplication"
@@ -36,10 +36,10 @@
     </activity>
 
     <activity
-        android:name=".main.ArgotRowViewActivity"
+        android:name=".main.detail.ArgotRowViewActivity"
         android:screenOrientation="portrait"
-        android:windowSoftInputMode="stateUnchanged"
         android:theme="@style/AppTheme.NoActionBar"
+        android:windowSoftInputMode="stateUnchanged"
         />
 
     <activity
@@ -63,12 +63,12 @@
     </service>
 
     <provider
-        android:authorities="com.android.ted.inputer.db.cp.ArgotContentProvider"
+        android:authorities="com.mrxiong.argot.db.cp.ArgotContentProvider"
         android:enabled="true"
         android:exported="true"
         android:grantUriPermissions="true"
-        android:name=".db.cp.ArgotContentProvider"
-        android:readPermission="com.android.ted.inputer.permission.ACCESS_DATA"/>
+        android:name=".store.cp.ArgotContentProvider"
+        android:readPermission="com.mrxiong.argot.permission.ACCESS_DATA"/>
 
   </application>
 
